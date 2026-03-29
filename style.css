@@ -1,0 +1,108 @@
+/* * {
+  outline: 1px solid red;
+} */
+
+html {
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(255, 174, 107));
+    background-attachment: fixed; /* prevents gradient from scrolling! hoho! */ 
+    height: 100%;
+    justify-items: center;
+
+    /* text options here! */
+    text-align: center;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.555);
+    color: rgb(255, 102, 0);
+
+    /* font settings here! */
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+
+    /* how far away from the edges the content should be */
+    margin-left: 15vw;
+    margin-right: 15vw;
+
+    margin-bottom: 25%;
+
+    filter: hue-rotate(-20deg);
+}
+.overlay {
+    position:fixed;
+    left:0px;
+    right:0px;
+    top:0px;
+    bottom:0px;
+    width: 100%;
+    filter: opacity(10%);
+}
+
+h1 {
+    /* text outline */
+    -webkit-text-stroke: 2px white;
+}
+.subheader {
+    color: purple;
+}
+
+hr {
+    /* makes the horizontal line a bit shorter */
+    width: 60%;
+    color: black;
+}
+
+.statuscontainer {
+    position: absolute;
+    left: 75%;
+    right: 2%;
+    top: 10%;
+    bottom: 40%;
+
+    background-color: rgba(255, 255, 255, 1);
+    background-image: url("/Images/notepaper.png");
+
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 35px;
+    color: rgb(31, 31, 32);
+}
+
+.socialscontainer {
+    position: fixed;
+    left: 2%;
+    right: 88%;
+    top: 10%;
+    bottom: 10%;
+
+    /* sets how the stuff is displayed (column centered, spaced evenly) */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px; /* round corners */
+}
+.socialimg {
+    /* social icon size relative to the width of the parent container */
+    width: 100%;
+
+    /* makes the icon smoothly transition when a property changes */
+    transition: transform 0.25s ease;
+}
+.socialimg:hover {
+    /* make it bigger when its hovered */
+    transform: scale(1.2);
+}
+
+img.darcywave {
+    /* shadow behind the waving gif */
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.377))
+}
+img.kaylabutton {
+    /* sets it to never scroll */
+    /* position: absolute;
+    right: 20px;
+    top: 20px; */
+
+    width: 20vw;
+}
