@@ -3,4 +3,10 @@ html {
     text-align: center;
     justify-items: center;
     align-items: center;
+    /* this is just in case, i dont plan on putting text here unless i have to */
+    text-align: center;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.555);
+    color: rgb(255, 102, 0);
+    font-family: "Comic Sans MS";
+    font-size: 20px;
 }
