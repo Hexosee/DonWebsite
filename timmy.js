@@ -9,6 +9,6 @@ timmy.onclick = function() {
     breath.play()
 
     setTimeout(function() {
-       window.location.href = "/"; 
+       window.location.href = "/home"; 
     }, breath.duration*1000)
 }
