@@ -1,0 +1,54 @@
+/* * {
+  outline: 1px solid red;
+} */
+
+html {
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(252, 155, 255));
+    background-attachment: fixed; /* prevents gradient from scrolling! hoho! */ 
+    height: 100%;
+    justify-items: center;
+
+    /* text options here! */
+    text-align: center;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.555);
+    color: rgb(250, 106, 255);
+
+    /* font settings here! */
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+
+    /* how far away from the edges the content should be */
+    margin-left: 15vw;
+    margin-right: 15vw;
+
+    margin-bottom: 25%;
+
+    filter: hue-rotate(0deg);
+
+    /* cursor: url('img/cursor.gif'), auto; */
+}
+.overlay {
+    position:fixed;
+    left:0px;
+    right:0px;
+    top:0px;
+    bottom:0px;
+    width: 100%;
+    filter: opacity(10%);
+
+    pointer-events: none;
+}
+
+h1 {
+    /* text outline */
+    -webkit-text-stroke: 2px white;
+}
+.subheader {
+    color: purple;
+}
+
+hr {
+    /* makes the horizontal line a bit shorter */
+    width: 60%;
+    color: black;
+}
