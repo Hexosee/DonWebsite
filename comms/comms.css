@@ -28,4 +28,7 @@ div.extile {
 .exampleimg {
     width: 100%;
     border-radius: 10px;
+
+    /* this cancels out the hue rotation in style.css so you can see the actual colors */
+    filter: hue-rotate(20deg); 
 }
