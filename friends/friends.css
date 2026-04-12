@@ -1,0 +1,58 @@
+.statuscontainer {
+    position: absolute;
+    left: 75%;
+    right: 2%;
+    top: 10%;
+    bottom: 40%;
+
+    background-color: rgba(255, 255, 255, 1);
+    background-image: url("img/notepaper.png");
+
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 35px;
+    color: rgb(31, 31, 32);
+}
+
+.socialscontainer {
+    position: fixed;
+    left: 2%;
+    right: 88%;
+    top: 10%;
+    bottom: 10%;
+
+    /* sets how the stuff is displayed (column centered, spaced evenly) */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px; /* round corners */
+}
+.socialimg {
+    /* social icon size relative to the width of the parent container */
+    /* your big words scare me kayla im not smart */
+    width: 100%;
+
+    /* makes the icon smoothly transition when a property changes */
+    transition: transform 0.25s ease;
+}
+.socialimg:hover {
+    /* make it bigger when its hovered */
+    transform: scale(1.2);
+}
+
+img.darcywave {
+    /* shadow behind the waving gif */
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.377))
+}
+img.kaylabutton {
+    /* sets it to never scroll */
+    /* position: absolute;
+    right: 20px;
+    top: 20px; */
+
+    width: 20vw;
+}
