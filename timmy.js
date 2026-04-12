@@ -5,6 +5,10 @@ console.log(timmy)
 
 timmy.onclick = function() {
     timmytalk.remove()
+
+    // mark the audio to play on the home menu
+    localStorage.setItem('playjingle', 'true')
+
     timmy.src = "img/timmybreath.png"
     breath.play()
 
