@@ -6,9 +6,9 @@ err = document.getElementById("err")
 erraudio = document.createElement("audio")
 erraudio.src = "sound/no.mp3"
 
-secretpanel.addEventListener("mouseleave", () => {
-    secretinput.blur()
-})
+// secretpanel.addEventListener("mouseleave", () => {
+//     secretinput.blur()
+// })
 
 const secrets = {
     "cGlhbm8=": "L3BpYW5v"
