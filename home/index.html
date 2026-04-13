@@ -66,15 +66,20 @@
         <br>
         <br>
         
-        <div class="slideup">
+        <div class="slideup" id="slideup">
             <img src="img/Tab-slider.png" style="width:100%;object-fit: contain;display:inline-block">
             <div class="secretpanel">
             
-                <h1>test</h1>
+                <h1>Enter a code?</h1>
                 <hr>
                 <input type="text" class="secretinput" id="secretinput" autocomplete="off">
                 <br>
-                <button>ahhhh</button>
+                <button id="secretbutton">Enter?</button>
+
+                <br>
+                <p style="color:red;display:none;" id="err">
+                    Not a valid code!
+                </p>
             </div>
         </div>
 
