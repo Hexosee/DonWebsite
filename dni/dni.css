@@ -37,7 +37,7 @@
 }
 
 html {
-    background-image: linear-gradient(rgb(255, 255, 255), rgb(255, 174, 107));
+    background-image: linear-gradient(rgb(0, 0, 0), rgb(122, 65, 19));
     background-attachment: fixed; /* prevents gradient from scrolling! hoho! */ 
     height: 100%;
     justify-items: center;
