@@ -1,14 +1,36 @@
 @property --color {
     syntax: '<color>';
-    initial-value: black;
+    initial-value: rgb(255, 174, 107);
     inherits: true;
 }
 
 :root {
-    transition: --color 1s ease-in-out;
+    transition: --color .15s ease-in-out;
+}
+
+html {
+    filter: hue-rotate(0deg);
 }
 
 body {
     background-image: linear-gradient(rgb(255, 255, 255), var(--color));
-    color: var(--color)
+    color: var(--color);
+}
+
+.friends {
+    /* background-color: red; */
+    /* height: 40vh;*/
+    /* width: 100%; */
+
+    display: grid;
+    place-items: center;
+}
+.friends > * {
+    grid-area: 1/1;
+}
+
+.friendimg {
+    width:60%;
+    outline: 1px solid red;
+    transition: transform 0.15s ease;
 }

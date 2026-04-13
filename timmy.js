@@ -1,3 +1,10 @@
+const mobilewarning = document.getElementById("mobilewarning")
+if(window.innerWidth < 600) {
+    mobilewarning.style.display = "block"
+} else {
+    mobilewarning.style.display = "none"
+}
+
 const timmy = document.getElementById("timmy")
 const timmytalk = document.getElementById("timmytx")
 const breath = new Audio("sound/timmy breath.wav")
