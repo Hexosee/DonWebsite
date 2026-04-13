@@ -1,0 +1,8 @@
+don/darc = orange/base color 
+kayla = pink
+lib = light green
+mike = dark red
+paint = desaturated blue 
+order
+=========
+lib, paint, darcy, mike, kayla
