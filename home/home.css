@@ -56,3 +56,34 @@ img.kaylabutton {
 
     width: 20vw;
 }
+
+.slideup {
+    transition: transform 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    transform: translate(0,0);
+
+    position: fixed;
+    left: 70%;
+    right: 5%;
+    top: 93%;
+    bottom: -65%;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction:column;
+}
+
+.slideup:hover {
+    transform: translate(0,-60%);
+}
+
+.secretpanel {
+    background-color: #6D7084;
+    width: 100%;
+    height: 100%;
+}
+.secretinput {
+    width: 70%;
+}
