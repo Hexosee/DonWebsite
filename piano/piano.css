@@ -3,10 +3,10 @@
 img {
     cursor: pointer;
 
-    filter: drop-shadow(1px 1px 0 white)
-            drop-shadow(-1px -1px 0 white)
-            drop-shadow(-1px 1px 0 white)
-            drop-shadow(1px -1px 0 white)
+    filter: drop-shadow(3px 3px 0 white)
+            drop-shadow(-3px -3px 0 white)
+            drop-shadow(-3px 3px 0 white)
+            drop-shadow(3px -3px 0 white)
 }
 
 p {
