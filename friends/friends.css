@@ -14,7 +14,9 @@ html {
 
 body {
     background-image: linear-gradient(rgb(255, 255, 255), var(--color));
-    color: var(--color);
+    
+    /* --color but darker */
+    color: color-mix(in srgb, var(--color), black 30%);
 }
 
 .friends {
