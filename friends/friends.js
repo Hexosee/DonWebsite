@@ -20,36 +20,121 @@ const friends = document.getElementById("friends")
 var numchildren = friends.children.length
 var middle = Math.floor(numchildren/2)
 var i = 0
-for(var child of friends.children) {
-    console.log(child)
+
+var selected = -1
+
+var data = [
+    {
+        name: "AstraNova",
+        desc: "desc goes here"
+    },
+    {
+        name: "Lib",
+        desc: "desc goes here"
+    },
+    {
+        name: "Paint",
+        desc: "desc goes here"
+    },
+    {
+        name: "Donald",
+        desc: "desc goes here"
+    },
+    {
+        name: "Mike",
+        desc: "desc goes here"
+    },
+    {
+        name: "Kayla",
+        desc: "desc goes here"
+    },
+    {
+        name: "Owen",
+        desc: "desc goes here"
+    }
+]
+
+for(let child of friends.children) {
+    data[i].color = getComputedStyle(child).getPropertyValue("--color")
 
     let diff = i - middle
 
     let basezind = -Math.abs(diff) + numchildren
     child.style.zIndex = basezind
 
-    let vw = diff*10
-    let vh = (child.style.zIndex - numchildren)*5
+    let basesize = 1 - Math.abs(diff) * 0.15
+    basesize /= 1.25
+
+    let vw = diff*265 * basesize
+    let vh = (child.style.zIndex - numchildren)*25 * basesize
+
+    child.style.transform = `translate(${vw}px, ${vh}px) scale(${basesize})`
 
     let next = i + Math.sign(-diff)
     console.log(next)
 
-    let basesize = 1 - Math.abs(diff) * 0.15
-    child.style.transform = `translate(${vw}vw, ${vh}vh) scale(${basesize})`
-
+    let me = i
     child.addEventListener('mouseenter', (e) => {
-        const el = e.target
-        el.style.transform = `translate(${vw}vw, ${vh-1}vh) scale(${basesize*1.1})`
-        el.style.zIndex = 1000
+        if(selected != -1) return;
         
-        setColor(getComputedStyle(el).getPropertyValue("--color"))
-    })
-    child.addEventListener('mouseleave', (e) => {
         const el = e.target
-        el.style.transform = `translate(${vw}vw, ${vh}vh) scale(${basesize})`
+        el.style.transform = `translate(${vw}px, ${vh-1}px) scale(${basesize*1.1})`
+        el.style.zIndex = 500
+        
+        setColor(data[me].color)
+    })
+
+    let unsel = function(el) {
+        if(selected != -1) return;
+
+        el.style.transform = `translate(${vw}px, ${vh}px) scale(${basesize})`
         el.style.zIndex = basezind
 
         setColor(initcolor)
+    }
+    child.addEventListener('mouseleave', (e)=>{
+        const el = e.target
+        unsel(el)
+    })
+
+    child.addEventListener('click', (e) => {
+        if(selected != -1) return;
+
+        selected = me
+
+        // dont really wanna write html in js but....
+        const menu = document.createElement("div")
+        friends.appendChild(menu)
+
+        menu.style.backdropFilter = "blur(5px)"
+        menu.style.backgroundColor = "rgb(from var(--color) r g b / 0.45)"
+        menu.style.width = "200%"
+        menu.style.height = "100%"
+        menu.style.display = "flex"
+        menu.style.flexDirection = "column"
+        menu.style.alignItems = "center"
+        menu.style.zIndex = 1000
+
+        menu.innerHTML = `
+            <h1>${data[me].name}</h1>
+            <hr>
+            <br>
+            <pre>
+${data[me].desc}
+            </pre>
+        `
+
+        const button = document.createElement("button")
+        button.innerText = "close"
+        button.style.position = "absolute"
+        button.style.bottom = "20px"
+        menu.appendChild(button)
+
+        button.addEventListener('click', () => {
+            selected = -1
+            menu.remove()
+            unsel(child)
+        })
     })
 
     i++
