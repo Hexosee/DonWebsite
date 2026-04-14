@@ -112,6 +112,7 @@ for(let child of friends.children) {
         menu.style.height = "100%"
         menu.style.display = "flex"
         menu.style.flexDirection = "column"
+        menu.style.flexWrap = "wrap"
         menu.style.alignItems = "center"
         menu.style.zIndex = 1000
 
