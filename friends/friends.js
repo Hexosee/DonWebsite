@@ -34,7 +34,7 @@ var data = [
     },
     {
         name: "Paint",
-        desc: "desc goes here"
+        desc: "One of my best friends, the guy does music and honestly hes really good at it. I met paint a long time ago around when i was a small chud, i wasnt really as good friends with him at the start and didnt really talk to him much. However ever since we started working on projects together we got alot closer. Hes the guy behind the sunglasses mix"
     },
     {
         name: "Donald",
@@ -108,21 +108,21 @@ for(let child of friends.children) {
 
         menu.style.backdropFilter = "blur(5px)"
         menu.style.backgroundColor = "rgb(from var(--color) r g b / 0.45)"
-        menu.style.width = "200%"
+        menu.style.width = "100%"
         menu.style.height = "100%"
         menu.style.display = "flex"
         menu.style.flexDirection = "column"
-        menu.style.flexWrap = "wrap"
         menu.style.alignItems = "center"
         menu.style.zIndex = 1000
+        menu.style.padding = "20px"
 
         menu.innerHTML = `
             <h1>${data[me].name}</h1>
             <hr>
             <br>
-            <pre>
+            <p>
 ${data[me].desc}
-            </pre>
+            </p>
         `
 
         const button = document.createElement("button")
