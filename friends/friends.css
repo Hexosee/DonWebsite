@@ -16,7 +16,7 @@ body {
     background-image: linear-gradient(rgb(255, 255, 255), var(--color));
     
     /* --color but darker */
-    color: color-mix(in srgb, var(--color), black 30%);
+    color: color-mix(in srgb, var(--color), rgb(0, 0, 0) 10%);
 }
 
 .friends {
