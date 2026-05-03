@@ -27,7 +27,7 @@ const songnames = [
     "Beautiful Boy",
     "Seizure",
     "Movin' Out",
-    "she hid this music sheet from me, i hope she doesnt mind.."
+    "Wind Beneath My Wings"
 ]
 
 function toggleplay() {
