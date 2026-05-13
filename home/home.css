@@ -37,11 +37,13 @@
     width: 100%;
 
     /* makes the icon smoothly transition when a property changes */
-    transition: transform 0.25s ease;
+    transition: transform 0.25s ease, filter 0.25s ease;
 }
 .socialimg:hover {
     /* make it bigger when its hovered */
     transform: scale(1.2);
+    /* make it brighter when hovered */
+    filter: brightness(150%);
 }
 
 img.darcywave {
@@ -55,6 +57,10 @@ img.kaylabutton {
     top: 20px; */
 
     width: 20vw;
+    transition: filter 0.25s ease, transform 0.25s ease;
+}
+img.kaylabutton:hover {
+    transform: scale(1.1,1.1)
 }
 
 .slideup {
@@ -86,4 +92,8 @@ img.kaylabutton {
 }
 .secretinput {
     width: 70%;
+}
+
+h3 {
+    text-decoration: underline;
 }

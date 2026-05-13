@@ -3,6 +3,11 @@
     overflow: hidden;
 }
 
+html {
+    /* this cancels out the hue rotation in style.css so you can see the actual colors */
+    filter: hue-rotate(0deg); 
+}
+
 div.exrow {
     /* position: absolute; */
     /* left: -10%; */
@@ -28,7 +33,4 @@ div.extile {
 .exampleimg {
     width: 100%;
     border-radius: 10px;
-
-    /* this cancels out the hue rotation in style.css so you can see the actual colors */
-    filter: hue-rotate(20deg); 
 }
