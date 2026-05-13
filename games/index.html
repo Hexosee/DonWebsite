@@ -4,23 +4,14 @@
     <head>
         <title>GAMES YAY</title>
         <link rel="stylesheet" href="/shared/css/style.css">
-        <style>
-            html {
-                filter: hue-rotate(0deg);
-            }
-
-            body {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                flex-direction: column;
-            }
-        </style>
+        <link rel="stylesheet" href="games.css">
+        <script src="games.js"></script>
     </head>
     <body>
-        <h1>KAYLA TAKES A REALLY REALLY BAD TURN</h1>
-        <iframe src="source/runner/index.html" style="width: 800px; height: 600px;"allow="autoplay; fullscreen; keyboard" 
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups">></iframe>
+        <h1>Games</h1>
+        <div class="gamerow">
+            <game-tile thumbnail="runner" name="KAYLA TOOK A BAD TURN" linkto="runner"></game-tile>
+            <game-tile thumbnail="runner" name="KAYLA TOOK A BAD TURN" linkto="runner"></game-tile>
+        </div>
     </body>
 </html>
