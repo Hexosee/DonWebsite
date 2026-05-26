@@ -13,8 +13,7 @@ const canplay = [
     "sound/piano6.mp3",
     "sound/piano7.mp3",
     "sound/piano8.mp3",
-    "sound/piano9.mp3",
-    "sound/piano10.mp3"
+    "sound/piano9.mp3"
 ]
 
 const songnames = [
@@ -26,8 +25,7 @@ const songnames = [
     "A Star is Born!",
     "Beautiful Boy",
     "Seizure",
-    "Movin' Out",
-    "Wind Beneath My Wings"
+    "Movin' Out"
 ]
 
 function toggleplay() {
