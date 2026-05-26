@@ -38,7 +38,7 @@ var data = [
     },
     {
         name: "Donald",
-        desc: "desc goes here"
+        desc: "Its me!"
     },
     {
         name: "Mike",
