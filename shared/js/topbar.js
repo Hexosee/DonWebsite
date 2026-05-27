@@ -87,7 +87,7 @@ style.href = "/shared/css/topbar.css"
 document.head.appendChild(style)
 
 let topbar = document.createElement("top-bar")
-document.body.appendChild(topbar)
+document.body.prepend(topbar)
 
 let topbaricons = document.getElementById("topbaricons")
 
