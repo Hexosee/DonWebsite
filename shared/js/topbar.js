@@ -57,6 +57,11 @@ class TopBar extends HTMLElement {
 }
 customElements.define("top-bar", TopBar)
 
+var style = document.createElement("link")
+style.rel = "stylesheet"
+style.href = "/shared/css/topbar.css"
+document.head.appendChild(style)
+
 let topbar = document.createElement("top-bar")
 document.body.appendChild(topbar)
 
