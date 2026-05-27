@@ -43,12 +43,18 @@
     bottom: 0vw;
 
     background-color: black;
+    border-left: 5px solid black;
+    box-sizing: border-box;
 
     display: flex;
     flex-direction: row;
     justify-content: center;
+    text-align: center;
+}
+.scrollingcontainer:not(:has(img)) {
     align-items: center;
 }
+
 #marq {
     font-size: 165%;
 }

@@ -31,3 +31,7 @@
     font-family: "revista";
     src: url("/shared/fonts/revista.ttf");
 }
+@font-face {
+    font-family: "alfred";
+    src: url("/shared/fonts/alfred.otf");
+}

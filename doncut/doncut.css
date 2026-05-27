@@ -1,0 +1,14 @@
+body {
+    background-image: linear-gradient(rgb(0, 0, 0), rgb(255, 39, 39));
+    color: black;
+}
+
+.imagerow {
+    display:flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+
+    height: 60vh;
+}
