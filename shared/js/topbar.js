@@ -77,7 +77,6 @@ class TopBar extends HTMLElement {
             '<span style="color: rgb(33, 52, 226)">' +
                 "my name is paint, and i cant fe el my legs. i deboned them." +
                 '</span>',
-            ''
         ]
                     
         let topick = Math.floor(Math.random() * canpick.length)
