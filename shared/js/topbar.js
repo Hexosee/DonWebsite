@@ -27,7 +27,7 @@ customElements.define("social-link", SocialLink)
 class TopBar extends HTMLElement {
     connectedCallback() {
         this.outerHTML = `
-            <div class="topbar" id="topbar">
+        <div class="topbar" id="topbar">
             
             <div class="topbaricons" id="topbaricons"></div>
 
@@ -37,6 +37,8 @@ class TopBar extends HTMLElement {
                 </marquee>
             </div>
         </div>
+        <br><br>
+
         `
 
         let marq = document.getElementById("marq")
