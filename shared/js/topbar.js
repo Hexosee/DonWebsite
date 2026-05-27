@@ -1,3 +1,69 @@
+class Social {
+    constructor(img, link) {
+        this.img = img
+        this.link = link
+    }
+}
+
+// social links
+let toadd = [
+    new Social("home", "/home"),
+    new Social("twitter", "https://x.com/DonaldAni1010"),
+    new Social("youtube", "https://www.youtube.com/@donaldani10/videos"),
+    new Social("roblox", "https://www.roblox.com/users/349593445/profile"),
+    new Social("comms", "/comms"),
+    new Social("dni", "/dni"),
+    new Social("games", "/games/runner")
+]
+
+// marquee texts
+// could hide secret strings in here
+let canpick = [
+    "the bugs are back",
+    "the glunch just grew legs im.. im terrified dude.",
+    "my girl bought me my first car, damn man im selling that immediately",
+    "high spirits, high power",
+    "dancing, walking rearranging furniture! kayla's, shopping, i let the mike out of his cage!",
+    "shoutout the hemmylings",
+    "shoutout the sunglasses team",
+    "shoutout the <a href=\"/home\">artist</a> of this website",
+    "i hope i remember to pay for this site",
+    "i also own donaldani.com, i just cant use it",
+    "im 0-22 in wrestling, JV warrior???",
+    "sniper is the worst class, you should die if you main him #truthnuke",
+    "is 3'2'' 400lbs good? im trying to cut down to 6'9'' 125 lbs.",
+    "check out <a href=\"https://hexose.cc\">hexose.cc</a>",
+    "paint please, the glunch is escaping.",
+    "THE BUGS ARE STILL HERE",
+    "you ain't seen ten bands in your life, jit.",
+    "tied the ops to the back of a trackhawk and dragged 'em around the block for 24-hours.",
+    "i am to be respected!!!!!!!!!!!",
+    "im smoking on dinkelberg.",
+    "ops wanted some initiative, blew up their entire quadrant i'm movin' like oppenheimer.",
+    "she dropped that booty on me from an egregarious angle.",
+    '<img src="/shared/img/topbar/telemove.gif" style="height: 8vh"><img src="/shared/img/topbar/telemove.gif" style="height: 8vh" width="150"><img src="/shared/img/topbar/telemove.gif" style="height: 8vh"><img src="/shared/img/topbar/telemove.gif" style="height: 8vh">',
+    '<img src="/shared/img/topbar/Snowy_Egret.png" style="height: 8vh">',
+    '<img src="/shared/img/topbar/gamemakererror.png" style="height: 8vh">',
+    '<img src="/shared/img/topbar/malcom.png" style="height: 8vh" width="250">',
+    '<img src="/shared/img/topbar/adobeanimate.png" style="height: 8vh">',
+
+    // ones i added
+    "fart mode: TRUE",
+    "poop mode: ON",
+    "<a target=\'_blank\' href=\'https://phil.kayladotcom.org/getfile/sapsucker%20rays\'>click me</a>",
+    '<span style="color: rgb(255, 113, 160)">i have hacked donald\'s website. do not resist me. -kayla</span>',
+    '<span style="color: rgb(255, 113, 160)">' +
+        "okay, look. it's me again. listen, i got into some pretty hot water here. long story short, do you have $200,000 dollars that i can borrow? -kayla" +
+        '</span>',
+    ":-)",
+    "downloading virus...",
+    "you are 1,000,000th visitor! <a target=\'_blank\' href=\'https://phil.kayladotcom.org/getfile/sapsucker%20rays\'>click here for prize!</a>",
+    '<img src="https://phil.kayladotcom.org/getfile/youll never unsee" style="height: 8vh" width="200">',
+    '<img src="/shared/img/topbar/medic.png" style="height: 8vh" width="400">',
+    '<img src="/shared/img/topbar/smoke.png" style="height: 8vh">',
+    'ţ̸̡̡̨̨̨̨̨̢̡̧̢̢͚̱̥̟͍̝̙͉͚͎͕͙͈̺̹̘̗̯̜̝̤̰̥̱̗͓̻͙͓̹͔͖͕̭͍̬͕̥̫͎̹̱͓̠͔̭̳͚̩̗̯̞̠͇̰̗̺̻̪̤̳̤͍̩͎̯̻͙͓̤̖̫͙͓̦͉̹̯̩̪̲̯̭̬̭̪̬̞̘̯̠̼̪̭͉̭̰̝̠͚͖̖̼͔̰̖͕̳̯̲̄̅͆̾̇́͆̑͌͒̎̚͜͜ͅͅͅh̶̛̜̳̺̝͙̹͌̌͊̉͊̈́̏̉̈́͐̽̅̀̀̓̎͆̔̓̆̀̒̓͂̆͐̌́̈́͊̈̏͂̑͋̽̂̈́̈́̆͊͆̐̾̿̈́́̚͘͘͝͠͝ḭ̶̡̢̢͕͚̳͓̫̤͖̝̻̗͔͈̠͎̣̘̯̳͇̙̘͔͓̻̞̜̭̰͔̍̌̂̈́̀̍̒̀̈̓́̀̇̾̔̈̽́͒͋́́͒̒̽̑́́̃͋̒̾̀͐̉̐̂̑͐̑̌̾͂̅̉̍̀̔̅͗̄͋͑́̉̂̀̓̅̈́̐͐̐̃͋͑͆͌̐́̈́̂̂̄̓̀̒̏̓͊̌͐͐̐͌̒͛͛̎̓͒̊̃̽̍̚̚̕͜͝͠͝ş̷̧̨̧̨̡̡̨̛̛̛̛͈͔̬̦̣͍̰̮̯̳̹̺̭̩̲͚̣̪̦̥͙̺͉͍̤̜͍̣̻͉̫̟̻̪̟̦̱͎̝̭͖͈̹̯̘̼̬̖̝̫͍̩̗̣̻͚̩͉̘̞̩̰͑̆̉̆͐͂̒̄͑̑̎̓͊͒̆̈́͊͌͗̉́̇̆́͆́̽̉̓͋͛̀͑̽̓̍́̽̍͌̆̾͂̈́̆̾̾̀̀̒̓͆̐̑̀̆͊́͋͒̏̓̚͘͘̚͜͝͠͠͝͝͠͝͠͠͠ ̷̢̨̡̨̡̢̡̨̛̥̮̩͖̥̱͎̖͙͓̹̹͙̖̗̯͖̲͇͕͉̫̪̩͇̜͖̞̻̤̱̜͕͎͖̤̹̬̝̘̟̠̖̱̰̠̝̭̥̺̦̹͉͖͍̱͚͕̥͙̠̯̹̯̤̺̘͔͇̗̰̯̣̭͎̜͖̰̭͇̟̞̪͖̞͔̣͚̝̜̖͎̳̠̼͚̜͚̈̑̒͌̈́̒̔̈̊̂̀̿̋̓̇́͛̐́̈́̈̔̄̿̉̆̆̔̓͋͌̑̽̏̄͛̿̎̆͑̏̆͐̀̃̽̀̈́͌̓̆̾̅̉̀̃̌̋̐͑̄̊̒̈̀̃̃̃́̏̃̑̑̔̈́̓̉̈͂͑̈́̏̀̍̃̍̐̇̈͌̃̈́̈́̂̂̐̓͋͂́̏̒͋̕̚͘̚̚̕͘̚͜͜͜͜͝͝͝͝͝͝ͅí̸̢̢̡̡̛̛̛͓̟͍̫̩̞͎͖̝̖͉̹̙̩̥̖̺̫̙̦͙̫͖̲̫̝͉̫̹̤̥͍̹̭̅͂̒̊͛̇̄̉́̍̇̓͑̿͆̀͊͐͗̒̊̿̆̈́̾͋̍̄̓͋̃̔͛͂̉̄͂́̋̌̋͋͒̓͊̓̈́̓̂̓̏̈́̍͊̆̓̐͊̓͆̽͌͘͘̚̚̕͜͜͜͠͝͝ͅͅş̸̢̨̨̛̛̯̮͇͇͙̫͚͚̠̦͚͈͍͓̯͙͙̳̮̤̮̟͈̣̺̈́̐̀̋̈́͒̋̈́̔͆̈́́̄̔̃̄̃̎̂̊́̕̚͠͝ͅ ̵̢̨̢̡̢̡̫̬̼̖͔͎̯̜̠͉̭͕̞͇͔̪̭͓͇͕̹̙̘̦͓͖̘͔̥̲͕͍̪̟̠̺̻͔̥̙͖̝̞͇̖̦̖͉̬͈̰̙̻̺̞͚͍̮͙̲̜͌̆͌̔̈́̂̇̿̍̆̏̿͑̀̆̔̎͐͑͆̓̈́̍̏̓̄͂̉͒̀͐̾̔̔̀̋̾̓̒͆͌̄̋̈́̈͋̄̀͒͛̾̉̀̓̾͒͑͂̏̆́̇́͛̒͑̉̿̇̽̌͆̌̈́̀̐̈́̃̈́̕̚͜͝͝͠͠͝͝͠ͅḿ̸̧̨̧̡̢̨̡̨̢̧̢̛̛̛̛̛̛̺̣̱̣̦̹̜̼̝͍̺̤̬̖̰̠̝̫̥̝̞͈̟̺̺̠̺̮̠͎̹͙̠͎͙̱̬͕̗̺͕̯̲̺̟͙͕̥̗̯̤̰̥̬͇̮̞̳͓̪͕̫̹͔̮̳͓̮̙͓̗͓̝̞̟̰̹͔̜͔̱͈̤̪̝̖̱̄̍̀̀́̓͊̔̽̀̉̏̂̊͊̒͛̋̓̆̾̈́̾̈́̄̿̑̀͊͊͌̌͐̓̎̒̔͂̈́̈́̆̀̔͑̈́̒̉̈̈̇̾̍́̂̒̂̈́̽͋̈̊̏͂̎̈́̂͌̍͛̿͊̔̀̉̎̒́̊̓̀͌͛̓̿́̀̅͆̾̚̚͘̕̚͘͜͠͝͠͠͠͝͝͝͝͝͝͠͝ͅỳ̷̡̨̨̨̢̛̛̻̣̭̘̱̲̙̺͖͓̖̫͙͓͓̲̞̩̜̦̖̭̩̭̟͚͈̮͔̱͚̞̝̝̤̰̙̲̻͕̪͉̪̻͇̟̺̪̻͕͎̻̝̫̰̥̲͖̺͉͈̳̟͇̻̬͉͔͙̰̰͎̞͍̜̬̩̽̀͂͐̊̈́̿̒͂̎̂̌͐̌̎̓͑͊͂̓̃͊̑̓̓͊̋̌̊̍͒̀̏̉̾̈̈́́͌̏́̌͆̎͗̆̏̄͌̅͑͂̔͑̈́͌̿͋͐̉̂͆̒͐̌̅̋͛̿̕̚̕̕̚̚̕͜͝͝͠͠͠͝͠͠͝ ̸̧̢̡̢̢̨̧̨̺̦̥͙͎͖̠͇̗̫̲̣̖̫̜̪̲̲͓̤̼̬̲͎̲̰͎̪͚͙̥͉̟̼̙͕̞̞̩͉̣̯̣͎͉̍̾̾͋̑̋̈́̈̀̓̊͂̈́̔̉̆́̈́̈́͌̏̽͆̍̋̄̿̿̎̏͌̕̚͘͠͠͠ͅͅs̷̢̢̝̬̙͎̫͎̖̤̿̓̎̿̄̆̾̂̀́̀̓̄͘͠͝ͅc̶̛̛̛͇̝͈͕̋͒͆̀͑̀͐̏̑͗͑̆̓̈̓̉͋͆̀̂̒̾͊̿̆̆̈̌͐̃̾̌͆̉͂̔̎̔̀̊̏̈́̀͋̈́̋̿͊͐̈̃̓̈́͗̇́̉̂̉́̄̿̀̈́̿̅͒̿̆̈́̄̃̀̍̽̃͐̓̀̀̔̋̈̀̏͑̊͑̈͛́̔̐̾͊͐̾̄̐̑̚͘̕̚̕̚͝͝͝͝͠͝ȃ̸̡̢̛̰̲͈͉͙̠̬͎̻͙̬̌̓̅́͋͒̿͋̌̎̆̅̾̀̏̎̌̃͂̂̓͛̽͛̂̃̓̊̇̂͛̄̃̆̓͗̈́̽͒̉͂̋́̀̋̿̇̑́̇̆͗̉̃̌͘̚̕̚͠͝͝͝͝ȑ̴̨̢̡̖̰̪͈̳̼̼͉̹̮̥̖̬̣̝͉͎͓͎̱̻̖̫͓̬̮̼̰̞͍̹̯̯̤͍̤̞̖̯̼͎̠̼͓͖͙̯͈̩͈̟̻̠̫͚̝͙̯̠̯̱͚̹̘̹̭̞̠̘͎̺̲̳̩͇͓͙̔̓̄͆̄͛͗́̓̄͆̃̑͘͜͜͠͠ͅͅͅͅͅͅͅͅͅŷ̵̧̧̨̡̢̢̨̧̡̦̼͓͎͎͇̩̠̠̥͎͈͍̹̭̪͉̭̳͉̜̖̭̙̯͙̦̣̳̫̠̜̲͙̟͈̜͕͈̟͈̺̜̩̰̻͍̰̺̗̲̱̫̼̥̥̱͉̱̤̙͇̠̝̞͖̗̤̱̙̼̻̬̭̹̻̭̼̣̩͕̮̹̬̭̫͈̻͇̜̫͈̦͚̳̠̟̩͔̠̣̖͕̩̊̀̈́̏̉̇̎̈́̎̈́̐̔̄͆̀͑̈́̎̾͒̀̒͊̅̀̅͂́̈͑́̑́͋̂͗̇̔̍͐̂̉̌́̅́͂̓̅̒̽̈́̒̂͂̈̄̂̈́̈́̋̆̉́́̇̽͐̓͐̕̕̕̕͘͘͜͜͜͜͝͝͝͝͝͝͝ͅͅͅͅͅ ̵̧̨̢̨̝͎̗̺͕̖̻̳̱̦̩̰͍̟̬͙̗̰̠͉͚͚͖̮͔̤̞̳̰̯̭̦̲̭̳̱̤̅͑̒̇̀̀͒̎͗̎̆̋̈́͐͜͠ͅt̶̨̢̨̧̧̡̛̛̪͖̱̱̠̬̬̺͈̱̹̩̮͕̮͕̻̫̗̙͍̝̺̳̦̮̪̘̱͚̣̪̰̠͍̠̣͓̑̏̄̋̇̎͌͗́̏̾͗̀̂͗͌͒̑̈̊̒̈́̊̔̌͗̋̆̊̽̍̅̏̑͗̂͊͆́̂͌̂́̊̀̓̆̓̆̒͌͑́͆̉́́̋̊͗͊͊̒͂̽̎͂̈́́̂̌̈́͑͒̈́̏͘͘̕̕̚͘͜͝͝͠͠͠͝͝ͅͅę̵̨̡̡̢̮͍̭̳̳̟̙̝̤̭̪̹̝̣̜̹̭̫̗͉̻̬͇̦̟̪͕̳̤̺̗̲̻̙̪͑͊̇̉͊̊͛̌͌́̀͊͋̐̕̕̚ͅͅx̸̧̡̡̡̢̹̩̞͍͕̲̤̟̣͖̗̞̖̭̙͇͕̰̝̰̰̤̬͈̺͔̤̫͈̞̲̞̮̼̥̜̮̣̤̝̠̯̖̮̖̝̯̳̝̠̫͎͚̘̫͙̟͑͋̎͒͑͐͂͜͜͜͜͜ţ̸̡̧̡̧̧̡̨̡̛̙̠̲̠̹̺͚̙̙̲̼̦̲͙͉͎͚̺̰̣̮̹͎͓̖̤̫̙͕̻̗͚̹̪̺̤̞̖̖͍̝̣͖̜̘̬̫̳̣͔̦͚͚̰͙͔͇̝͇̗̹̥͈̤̣͎͙̗̮̹̬̦͎̦̮̟͖̟̜̳̩̻͍͉͙̰̜̰͓̗̱̫̪̝͕͕̰̲͔̥̦̙̺̟̜̹̲̦̲̺̽̋̓͒̃͛́̆͗̊̀̌̒́̓͆̄͛́͊̿̌̾͐̿̐̃̍̆̈̈͗̒̆͒̅̈̍̓̓͂͗͒̂̃͌̊̅͌̅̒̑͛̾̆͑̓̉͌͌͛͋͊̉̋͌̊̃͊͐̾̐̄̉̈́͆̐̎̓̉̎̈́̈́͊̍̒̕͘̚̚̚̕̚͜͝͝͝͝͝͠͝ͅͅ ̵̡̨̢̧̨̢̢̧̧̧̧̛̛̮͉͍͙͔̜̜̗͚̼̩̩̼̖͓͚̪̻̣͖͙͉͎̪͍̖̫̙͍͇̼̪͔͚̻̪̭̥̬͕̤̳̯͕͙̟̠͚͈̜̜̜̪̻̭̮͓͖̠̜̟̗͍͙̭̳͍̮͕͇̬͚̟͇̣͔̘̰̳͚̰̭̱̱͍̬̗̹̮͎̘̉͐̂̃̊͐̅̅̅̂̃̅̿̇͂͂͐̈́̀͒̃̇͛́̀́̂͛̿̇͐͒̒̍͗͛̈́͐̾͌͐̔̇́̓̒́͂͊̄͒͋̾͆̊̆̆̊̇̌͆́̒͗̋̆̋̈́͆̅̿̉̕̕͘̕͘͜͜͜͝͝͝͠͠͝͝͝ͅͅǎ̶̡̡̡̨̨̢̧̡̨̨̨̧̡̧̢̨̨̢̛̛̺͎̳͙̥͎͓̭̪̬̹̖̳͖͓͇͍̩̹͈̩̝̦̰̼̻̱͇̰̲̹̰̙̱̺̤̭̪̺̯͙͍͕̦̜͓͇̣̖͙̖̞̳͈͈͕̞͉͔̜͉͍͙̯̩̪̮͈̼̞̣͚̙̻͕̰̟͕̗̬̫̞͍̭̬̮̥̥͈̱͖̩̣̖͖̭̟͍̺̘͊̿͑͛͑̌̉͋̅̓̂̄͊̈́̀̀̆͛́̈̆͆́̇̂̊͂͌̽́͑̄̃̈̄̑͊̊̂͗̾̈́̅̑̒̾̀̄̋̾̉͂̽̇͊̍̓̇̓̃̕̚̚̚̚̕̕͜͜͝͝͝͝͝ͅḩ̶̨̛̞̝̜̥̖͚̼̱͙͕̬͕͓͚̦̼͚͖̣̭̥̯̞̈́̌̑̓̉̓̔̃̂͊͒́̑̌̀̃̑̓̒̉̑̔͛̇͘̕͘͘͜͝͠͠ĥ̶̢̨̢̨̢̧͙̜̹͎̮̜̻͈̰̻̩͓̙͖̠̰̯͖̻̯̙͚̻̭̖̝̤̤̙̞̹̣͖̠̫̖̠͓̳̰̭̬̺͈̳̗̱̬̱̟̬͚̬̩̺͍̜͓͔͎̞͕̠̆̀̋̌̈́͐̍͗͑̀͒̀̀̈́͋̎̅̄̆̓́̄̍͐͛͊̐͐̌͐̇͋̒̃̄̃̔̌͊̚̚̕͜͜͝͝͠͝ȟ̶̢̡̧̢̢̛̩̙̪̺͇̲̯̰̖̬̬̯̩̗͇͍͓͈͔̜͓̪̺̣̰͈̣͙̟͚̣̺̝̫̠̤̞̻̺͉̯͖͓͍͔̣̭͇̪̟̗̩̣̩͇͇̱͖̮͔̗͙̥̗͔̗̤̬̱͖̪̪̺̻̭̯̩̰̦͉̲̙͈̝̝̥̦͓̼̣̟̝̘̥̠̹̠͑́̀̌̾͐͋͊͆̋̀̆̋̍́̽͋́̉͋̒̒͋̓̈́̈́͛͑̅͗̓̋͛̂̏̈͂̉̓̏̌̾̋̄̋̊̈̓̊͂͗͛̋͌̉̽͑̒̄͊̏̔͑̿̽̌̃̔̍̉̉́̎̾̒͛́̾̈̑́̐́̈́̈́̋͗̃̒̏̇͒̑̌̊̒̃̀͒͆͒͐͊̀̌͒̀̋̓͂̈̀̈́͘̕̕̚͘̕̚͘͜͜͝͝͝͝͝͠͠͝͝ͅͅḣ̶̡̧̨̢̡̡̨̧̨̛̛̛̛̛̛͖̱̗͚͖̩͙̩̞̮̙̦͉̩͉̙̥̱̹̞̻̞̗͚̫͕̯̖͕̳͈̜̗̳͎̟͇̦̹͖͈̝̥̪͕̩̘̙̹̦̼͎̲̘̱̟̣̻̝̩͕̺̲͚͓̹̞̦̩̲̩͙̠̩̫̪̫̣̜̼̘͈̘̰̞̺̪̪̻̗̗̽͒̃͊̋͛̎̀̃̓͒̅̔́̈́́̅̐̔̋́̍̈́̏̀̒̿́̈̄̂́͆͂͌͋͊͌͛̉̆̽̑̐͋̋̐̍̃̅̽̏̄̀̑͛̿̏̈́̎̄̏̾͆̑̌́̈͒̃̿̄̿̀͛̎̊͋͑̂̈́̈́͛͛͋̋̉͐̀̔̃͆̏́̿͋́̃̽́̉́͘̕̕͘̕̚̚̕͘͜͜͠͝͝͝͝͠͝͠͝͝͝ͅh̵̢̡̨̨̨̧̢̧̧̡̧̛̟̪͓̪̤͇̟͕̞͔̺̳̥̖̘̻̤̝̺̫̪̹͙̙͚̺̳̩̮̗̤̱͚͕̜͎̰̞̼͕͎̱̩͕̜͍͇̰̜̞͍̠͚̜̘͎̘̪̟͉̞̙̞̦̰̭̩̦̞͍͙͇͇̖͓̤̝̗̱̞͙̖̹̙̳͈̘̭̣͔̠͍̫̣͓̻̲̘͉͓̤͓̠̮̻͚͔̊̇̌̒͋̄̅̿͋͌͋̑́͗̊̀̈́̀͋̍̾̉̈́̋̀̅̀͋̎̋̾̉̓́̈́͗͐͋̚̚͜͝͝ͅͅͅḩ̸̢̝̜͈͈̖͙̟̝̲͈͚̪̥͈̙̬̮̰͔̱̮̪͙̉͗́̓̆͑̌̌̃̔̎̌̀̓́͊̔̅̄̌̾̾̍̓̓̑̄̅̌̊͐̂̚͜͜͜͠͝͝h̴̢̨̨̢̧̨̨̢̨̧̧̨̧͍̲͇̮̻͙̜͉̫̪̖̟͖͈̳̼̜͈̼͕̲̜̙̭̯̱̠̲͇̤̻̹͙͇̻͍̘̺̖̮͍̝̟̘͓͇̠͔̮̥̻̗͚̲͚̦̝̻̻̳͉̼̩͙̘̺̰̣̻͎̠̼̯̫̰̗̩̰̳̮͔̱͙̜̖͇͔͇̜̲̜̜̘͓̻͈͎̺̹̦̪̩͖͓̠̼̺̻̲̫͇̘̬̬̖̓̍ͅḫ̴̨̛̛̛̛̹̝͕̮͉̗̺̦͙̮̦̺̮͚͍͇̣̭̤̺̯̯̺̬̮̗̹̻̬̰͓̗͖͇̮̰̬̦̪̜͎͉̭̱̹͙̠̝̥͎̦̥̺͕̳̠̭͇̔͑̉̈̌̈́̑̂̌͂͑̄́̀̓̌͛̍͋̀͂̀̉̓̾͋͒̅̀͌͂̂̀̃͗͆̓͛̇̽͐͐̄̍͗̌̑̈́̏̾̈́͐̈̄̉́͑̊̋͂͒̈́̎̓͑̑́̔̀͛̉́̆͋̾͐͊́͑̎̂̽̚̚̚͘͘̚̚͜͠͠͝͠͠͝͠͠͝͝ͅh̴̢̡̨̢̨̨̡̛̛̛̛̗̖͚̫̰̺̬͚͇͖̻͉̻͍̰̲͓̼̬̝̬̻̲̝̰͖͕̯̜͙͖̙̺̖̫̫̺̬̻͔̥̩̜̮̺͚̟̭͓̬̲̳̪͓̫̭̼̏̈́̈̃̑̇̅͊́͑̏̐͒̓͗͛̍̀͌́̏̔̆̑̊͐̽̌͋͋͂̋́̿͊̓͗͂̽̏͗̓̓͌̔̉͌͌̾͑̋̽̇̐̔̀͒͒̾̔̐̈͛̌̀̂͐̽̀̽͂̃̆̈́̋̒̈́̐̆͐̉͋̌͘͘̕̚͜͝͝͝͝͝͝͝͝͝͝h̶̨̡̧̧̧̨̨̡̧̛̛̛͖̞̱̘̭̜̰̞̘̩̝̣̰̭͉͙̪̝͔̼̮͓̥͓̪̣̝̞̹̹͇̟̲̩̻̯̖͕̫̳̺̘͕͚̠̮̹̮̗̹͇̻͓̣͖̘̮̩̞̙̝̭͍͎̳͈͇̫̞̀̏͌̀̌̽̄̀̃̋͒́̾͗͊̋̃̈́͗̌̋͂͑͒̓͊̈́̇̀͂̈́͂͆̄̈́̆͑̋̈̒̃͆̀͒͂̽̊̓̒̈́̿̋̈́́͒̓͑̒̐͛̀̄͑̓̅͂͛́̒̈́̇̈͌̌͋͋̑̅̏̽̚̚͜͝͠͝͝͝ͅͅh̸̡̡̢̡̡̧̛̗̬̣̤͓̹̻͚͕̭̺͓̳̟͚̭͖̼̩̳̼̹̳͈̳̼͕͎̘̙͙̞͉̟̠͖̻̮̖̼͔̗͉̩͈̱̠̥̱̲͎͚̲͉̣͖͙̜̤̩͖̝̥̑͆̒̀͌͒̔̌͊͊̌̕̕͜h̴̡̨̢̧̢̢̧̨̤̮̼͕͖̜̼̙̼̼̜̯͚͙̮̩͈̗̟̮͙͙̹̘̥͖͙͕̰͓̹̻̯̭̘͉̺̻̤̘͈̹̺̥̣͍̝̹̯̦͚̱̯̝̻͉̝̦̜͈̪̟̥̮̗̠͙̦̥̉͗̈̎͗́̋̀̅́̓̂̍̉̒̈́̄͊̂̾̇͒̈́͛̓̋͂́̈͆̅̌̋̓͐̍̓͑͊͗͑̊̊̎̈́̎̓͊̍̓͑͂̒̄̎̓̓̓̑͑͑̅̈͆̀̑́̽͆̆̈́͑̈̓̐̄͘͘̕͜͝͠͠͝͝h̷̢̧̨̡̢̡̢͎̭̮͓̠̤̮̜̭͍̯͔͍̖̠͚̬͎̻̥̟̖̞͉͇̟̦̠̙͕̣̼̜̤͓͎̠̹͉͉̟̻͕̻̘̯̲̻̖̪̣̼̝͎̩͚͍̠̪̦͍͓̩̫̰̖̙͎͔̗̗̼̗̙̫̺̺̺͇͎͎̲͊̑̎̆͛͜͜͝ͅͅh̷̨̡̡̢̡̧̧̧̧͖̱̫̫̰̺͖̫͔͎̭̜̰̖̤̞̗̘̝̩̜͖̮̲̱̣͓̘̠̭̹͕͉̞̗̪̼̮̹̦̯̥̩̼̟̝̲͉̲͔̹̺̜̯̖̠̖͚̤̰̬͈͚̼͔̞͎̼͇̬̘͖̩̜͓́͜͠ͅh̴̡̨̢̨̧̛͙͉̯̩͉̳̞͍̖͓̫̟̺̦̙̥̭̦̬̦͕̙͎̫͈̯̝͍̙̬̟͎̯̮͇̺̳͇̩̬̥͎̱̝̭̜̻̳͎̪̑̒͗̓́͐̐̇͐̍͛͗̀̎̄͋̀̄̉̔̽͊̐́̂̀̒͆͗͑̑̊̀̀̊̌̿̀́́̉̋́̄̐̍̌͋̐̈́̽̓̓̅̇̍͂͐͋̒̚̕͜͜͠͝͠͝͝h̷̡̡̛̥̭̩̙͇͓̣̜̺̼̖͓̩̗͖̖͚ͅh̷̡̧̡̡̡̧̨̢̢̨̨̢̡̧̧̗͕̥͕̖̹͇̳̻̟̖̘̥͙͚̯̺͇͓̗͕̪͎̰̺̲̞̼̰̹͕̹̠͚̻͍̺͈̪̱̙̦͇̰̼͍͎͍͇̰̳̼̣̟̹̩̹̣̗͉̮͕̱̻̙̘͓͓̼̬͇̗͇̗̬̰͎̤̳̳̩̝̗̱͎̮̲̖̜̩̰̮̯̯̰̳̫̪̲̘̪̘̩͇͇̠̍̏̐͊̎̍̾̀̚̕͜͜͜͜ͅͅh̵̨̡̨̛̛̦̦͙͔̣̫̞̱̰͔̘͎̬̻͉̺̺͇͎̣̻̗̘̼̹̺̯͈̰̗̗̩͙̼̟͇͇̯̬̠͙͙̩̱̖͑̏́̈́̅̆̔̾̆̎̍̍̈́̇̇̓̈́̐̈́̇̿̋͌́͑͛̐̆̌̐̇͗̂̉̀̿͂̿̃̅̈̈́̆̃̀̓͂͋̋̅̀̓̾̏̅̈͑̃̿͑͌͒̿͋̄̈͋̓̏̓̒̓̌̆͗͆̈̑͒̈̽̀̈́̽̾͗̓̈́̃͘͘̕͘͝͝͝͠͝͝͠ͅͅͅͅh̴̨̡̧̡̧̡̯͖͉̳̙͓̺͖͈̮̱̗̹͔̲̳͔̭̩̹̝̳̩̳̘͚͙̘͕̥̗̞͖̼̣͎̠̗̯̣͚͕̲̠̹͎̱͕͎̲̝͍̤̘̞̟̗͈͖͚͔͉̗̖͇̗͔̙̣̺̀̈́͊̾̉̎͐͌͊̆̾̌̋̔͊̍͑͐̑̂̇͒͗͗͐̌̒̉͆̑̀͐̀͋̊̚̚̕̚͝͠͠͝͠͝ͅͅ'
+]
+
 var hoversound = document.createElement("audio")
 hoversound.src = "/shared/sound/hover.wav"
 hoversound.volume = 0.4
@@ -43,41 +109,6 @@ class TopBar extends HTMLElement {
         `
 
         let marq = document.getElementById("marq")
-
-        let canpick = [
-            "fart mode: TRUE",
-            "poop mode: ON",
-            "<a target=\'_blank\' href=\'https://phil.kayladotcom.org/getfile/sapsucker%20rays\'>click me</a>",
-            '<span style="color: rgb(255, 113, 160)">i have hacked donald\'s website. do not resist me. -kayla</span>',
-            "the bugs are back",
-            "the glunch just grew legs im.. im terrified dude.",
-            "my girl bought me my first car, damn man im selling that immediately",
-            "high spirits, high power",
-            "dancing, walking rearranging furniture! kayla's, shopping, i let the mike out of his cage!",
-            "shoutout the hemmylings",
-            "shoutout the sunglasses team",
-            "shoutout the <a href=\"/home\">artist</a> of this website",
-            "i hope i remember to pay for this site",
-            "i also own donaldani.com, i just cant use it",
-            "im 0-22 in wrestling, JV warrior???",
-            "sniper is the worst class, you should die if you main him #truthnuke",
-            "is 3'2'' 400lbs good? im trying to cut down to 6'9'' 125 lbs.",
-            "check out <a href=\"https://hexose.cc\">hexose.cc</a>",
-            "paint please, the glunch is escaping.",
-            "THE BUGS ARE STILL HERE",
-            "you ain't seen ten bands in your life, jit.",
-            "tied the ops to the back of a trackhawk and dragged 'em around the block for 24-hours.",
-            "i am to be respected!!!!!!!!!!!",
-            "im smoking on dinkelberg.",
-            "ops wanted some initiative, blew up their entire quadrant i'm movin' like oppenheimer.",
-            "she dropped that booty on me from an egregarious angle.",
-            '<span style="color: rgb(255, 113, 160)">' +
-                "okay, look. it's me again. listen, i got into some pretty hot water here. long story short, do you have $200,000 dollars that i can borrow? -kayla" +
-                '</span>',
-            '<span style="color: rgb(33, 52, 226)">' +
-                "my name is paint, and i cant fe el my legs. i deboned them." +
-                '</span>',
-        ]
                     
         let topick = Math.floor(Math.random() * canpick.length)
         let picked = canpick[topick]
@@ -96,21 +127,6 @@ document.body.prepend(topbar)
 
 let topbaricons = document.getElementById("topbaricons")
 
-class Social {
-    constructor(img, link) {
-        this.img = img
-        this.link = link
-    }
-}
-let toadd = [
-    new Social("home", "/home"),
-    new Social("twitter", "https://x.com/DonaldAni1010"),
-    new Social("youtube", "https://www.youtube.com/@donaldani10/videos"),
-    new Social("roblox", "https://www.roblox.com/users/349593445/profile"),
-    new Social("comms", "/comms"),
-    new Social("dni", "/dni"),
-    new Social("games", "/games/runner")
-]
 for(social of toadd) {
     let sociallink = document.createElement("social-link")
     sociallink.setAttribute("img", social.img)
@@ -118,3 +134,5 @@ for(social of toadd) {
 
     topbaricons.appendChild(sociallink)
 }
+
+document.documentElement.lang = "en" // zalgo text makes it think its vietnamese

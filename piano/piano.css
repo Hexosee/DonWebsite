@@ -1,6 +1,6 @@
 @import "/shared/css/fonts.css";
 
-img {
+#piano {
     cursor: pointer;
 
     filter: drop-shadow(.25vw .25vw 0 white)
@@ -9,7 +9,7 @@ img {
             drop-shadow(.25vw -.25vw 0 white)
 }
 
-p {
+html {
     text-align: center;
     color: white;
     font-size: 24px;
