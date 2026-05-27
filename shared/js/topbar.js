@@ -1,3 +1,6 @@
+var hoversound = document.createElement("audio")
+hoversound.src = "/shared/sound/hover.wav"
+document.body.appendChild(hoversound)
 class SocialLink extends HTMLElement {
     connectedCallback() {
         const img = this.getAttribute("img")
@@ -5,6 +8,11 @@ class SocialLink extends HTMLElement {
 
         let ael = document.createElement("a")
         ael.href = link
+
+        ael.addEventListener("mouseenter", function() {
+            hoversound.currentTime = 0
+            hoversound.play()
+        })
         
         let imgel = document.createElement("img")
         imgel.src = `/shared/img/socials/${img}.gif`
