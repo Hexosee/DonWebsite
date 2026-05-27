@@ -40,6 +40,11 @@ let canpick = [
     "im smoking on dinkelberg.",
     "ops wanted some initiative, blew up their entire quadrant i'm movin' like oppenheimer.",
     "she dropped that booty on me from an egregarious angle.",
+    '<img src="/shared/img/topbar/telemove.gif" style="height: 8vh" width="200">',
+    '<img src="/shared/img/topbar/Snowy_Egret.png" style="height: 8vh" width="200">',
+    '<img src="/shared/img/topbar/gamemakererror.png" style="height: 8vh" width="200">',
+    '<img src="/shared/img/topbar/malcom.png" style="height: 8vh" width="200">',
+    '<img src="/shared/img/topbar/adobeanimate.png" style="height: 8vh" width="200">',
 
     // ones i added
     "fart mode: TRUE",
@@ -96,7 +101,7 @@ class TopBar extends HTMLElement {
                 </marquee>
             </div>
         </div>
-        <br><br>
+        <br><br><br>
 
         `
 
