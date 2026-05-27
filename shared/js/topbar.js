@@ -17,6 +17,7 @@ let toadd = [
 ]
 
 // marquee texts
+// could hide secret strings in here
 let canpick = [
     "the bugs are back",
     "the glunch just grew legs im.. im terrified dude.",
@@ -40,11 +41,11 @@ let canpick = [
     "im smoking on dinkelberg.",
     "ops wanted some initiative, blew up their entire quadrant i'm movin' like oppenheimer.",
     "she dropped that booty on me from an egregarious angle.",
-    '<img src="/shared/img/topbar/telemove.gif" style="height: 8vh" width="200">',
-    '<img src="/shared/img/topbar/Snowy_Egret.png" style="height: 8vh" width="200">',
-    '<img src="/shared/img/topbar/gamemakererror.png" style="height: 8vh" width="200">',
-    '<img src="/shared/img/topbar/malcom.png" style="height: 8vh" width="200">',
-    '<img src="/shared/img/topbar/adobeanimate.png" style="height: 8vh" width="200">',
+    '<img src="/shared/img/topbar/telemove.gif" style="height: 8vh"><img src="/shared/img/topbar/telemove.gif" style="height: 8vh" width="150"><img src="/shared/img/topbar/telemove.gif" style="height: 8vh"><img src="/shared/img/topbar/telemove.gif" style="height: 8vh">',
+    '<img src="/shared/img/topbar/Snowy_Egret.png" style="height: 8vh">',
+    '<img src="/shared/img/topbar/gamemakererror.png" style="height: 8vh">',
+    '<img src="/shared/img/topbar/malcom.png" style="height: 8vh" width="250">',
+    '<img src="/shared/img/topbar/adobeanimate.png" style="height: 8vh">',
 
     // ones i added
     "fart mode: TRUE",
@@ -57,8 +58,9 @@ let canpick = [
     ":-)",
     "downloading virus...",
     "you are 1,000,000th visitor! <a target=\'_blank\' href=\'https://phil.kayladotcom.org/getfile/sapsucker%20rays\'>click here for prize!</a>",
-    '<img src="https://phil.kayladotcom.org/getfile/youll never unsee" style="height: 8vh" width="200">'
-
+    '<img src="https://phil.kayladotcom.org/getfile/youll never unsee" style="height: 8vh" width="200">',
+    '<img src="/shared/img/topbar/medic.png" style="height: 8vh" width="400">',
+    '<img src="/shared/img/topbar/smoke.png" style="height: 8vh">'
 ]
 
 var hoversound = document.createElement("audio")
