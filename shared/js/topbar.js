@@ -38,7 +38,7 @@ class TopBar extends HTMLElement {
                 </marquee>
             </div>
         </div>
-        <br><br>
+        <br><br><br>
 
         `
 
