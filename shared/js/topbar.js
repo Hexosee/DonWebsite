@@ -51,7 +51,9 @@ let canpick = [
         '</span>',
     ":-)",
     "downloading virus...",
-    "you are 1,000,000th visitor! <a target=\'_blank\' href=\'https://phil.kayladotcom.org/getfile/sapsucker%20rays\'>click here for prize!</a>"
+    "you are 1,000,000th visitor! <a target=\'_blank\' href=\'https://phil.kayladotcom.org/getfile/sapsucker%20rays\'>click here for prize!</a>",
+    '<img src="https://phil.kayladotcom.org/getfile/youll never unsee" style="height: 8vh" width="200">'
+
 ]
 
 var hoversound = document.createElement("audio")
