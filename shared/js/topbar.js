@@ -45,7 +45,9 @@ class TopBar extends HTMLElement {
             "fart mode: TRUE",
             "poop mode: ON",
             "<a target=\'_blank\' href=\'https://phil.kayladotcom.org/getfile/sapsucker%20rays\'>click me</a>",
-            '<span style="color: rgb(255, 113, 160)">i have hacked donald\'s website. do not resist me. -kayla</span>'
+            '<span style="color: rgb(255, 113, 160)">i have hacked donald\'s website. do not resist me. -kayla</span>',
+            "the bugs are back",
+            "the glunch just grew legs im.. im terrified dude."
         ]
                     
         let topick = Math.floor(Math.random() * canpick.length)
@@ -67,9 +69,9 @@ class Social {
     }
 }
 let toadd = [
-    new Social("twitter", "/workinprogress"),
-    new Social("youtube", "/workinprogress"),
-    new Social("roblox", "/workinprogress"),
+    new Social("twitter", "https://x.com/DonaldAni1010"),
+    new Social("youtube", "https://www.youtube.com/@donaldani10/videos"),
+    new Social("roblox", "https://www.roblox.com/users/349593445/profile"),
     new Social("comms", "/comms"),
     new Social("dni", "/dni"),
     new Social("games", "/games")
