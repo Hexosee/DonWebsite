@@ -33,7 +33,7 @@ class TopBar extends HTMLElement {
             <div class="topbaricons" id="topbaricons"></div>
 
             <div class="scrollingcontainer">
-                <marquee id="marq">
+                <marquee id="marq" scrollamount="8">
                     frick
                 </marquee>
             </div>
