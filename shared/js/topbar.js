@@ -70,7 +70,10 @@ class TopBar extends HTMLElement {
             "i am to be respected!!!!!!!!!!!",
             "im smoking on dinkelberg.",
             "ops wanted some initiative, blew up their entire quadrant i'm movin' like oppenheimer.",
-            "she dropped that booty on me from an egregarious angle."
+            "she dropped that booty on me from an egregarious angle.",
+            '<span style="color: rgb(255, 113, 160)">' +
+                "okay, look. it's me again. listen, i got into some pretty hot water here. long story short, do you have $200,000 dollars that i can borrow? -kayla" +
+                '</span>',
         ]
                     
         let topick = Math.floor(Math.random() * canpick.length)
