@@ -54,7 +54,6 @@ class TopBar extends HTMLElement {
             "my girl bought me my first car, damn man im selling that immediately",
             "high spirits, high power",
             "dancing, walking rearranging furniture! kayla's, shopping, i let the mike out of his cage!",
-            "is this a w goy moment?",
             "shoutout the hemmylings",
             "shoutout the sunglasses team",
             "shoutout the <a href=\"/home\">artist</a> of this website",
