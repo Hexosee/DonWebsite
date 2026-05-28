@@ -24,7 +24,8 @@ secretpanel.addEventListener("mouseleave", () => {
 })
 
 const secrets = {
-    "cGlhbm8=": "L3BpYW5v"
+    "cGlhbm8=": "L3BpYW5v",
+    "Y2xpcG9mdGhld2Vlaw==": "L2NsaXBvZnRoZXdlZWs="
 }
 
 secretbutton.addEventListener("click", () => {

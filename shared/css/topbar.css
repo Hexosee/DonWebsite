@@ -53,6 +53,16 @@
 }
 .scrollingcontainer:not(:has(img)) {
     align-items: center;
+
+    color: rgb(255, 102, 0);
+
+    font-family: "comic sans";
+    font-size: 20px;
+}
+
+/* cool css tricks to make YOU shit pants! */
+.scrollingcontainer a:visited {
+    color: #0000EE;
 }
 
 #marq {
