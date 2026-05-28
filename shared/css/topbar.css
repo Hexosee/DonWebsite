@@ -1,3 +1,5 @@
+@import "fonts.css";
+
 .topbar {
     position: fixed;
     top: 0vh;
@@ -50,14 +52,14 @@
     flex-direction: row;
     justify-content: center;
     text-align: center;
-}
-.scrollingcontainer:not(:has(img)) {
-    align-items: center;
 
     color: rgb(255, 102, 0);
 
     font-family: "comic sans";
     font-size: 20px;
+}
+.scrollingcontainer:not(:has(img)) {
+    align-items: center;
 }
 
 /* cool css tricks to make YOU shit pants! */
