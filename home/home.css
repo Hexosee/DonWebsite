@@ -46,7 +46,7 @@ img.kaylabutton:hover {
 }
 
 .slideup:hover {
-    transform: translate(0,-60%);
+    transform: translate(0,-80%);
 }
 
 .secretpanel {
@@ -60,4 +60,11 @@ img.kaylabutton:hover {
 
 h3 {
     text-decoration: underline;
+}
+
+ul {
+    display:inline-block;
+    text-align: left;
+    margin: 0;
+    padding: 0;
 }

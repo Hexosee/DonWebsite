@@ -1,3 +1,8 @@
+const secrets = {
+    "cGlhbm8=": "L3BpYW5v",
+    "Y2xpcG9mdGhld2Vlaw==": "L2NsaXBvZnRoZXdlZWs="
+}
+
 secretpanel = document.getElementById("slideup")
 secretinput = document.getElementById("secretinput")
 secretbutton = document.getElementById("secretbutton")
@@ -23,22 +28,51 @@ secretpanel.addEventListener("mouseleave", () => {
     sounddown.play()
 })
 
-const secrets = {
-    "cGlhbm8=": "L3BpYW5v",
-    "Y2xpcG9mdGhld2Vlaw==": "L2NsaXBvZnRoZXdlZWs="
+secretsfound = document.getElementById("secretsfound")
+var seensofar = window.localStorage.getItem("seensecrets")
+if(seensofar === null) seensofar = ""
+        
+var split = seensofar.split(",")
+split.pop()
+console.log(split)
+
+for(seen of split) {
+    let li = document.createElement("li")
+    let a = document.createElement("a")
+    a.href = atob(secrets[seen])
+    a.innerHTML = atob(seen)
+
+    li.appendChild(a)
+    secretsfound.appendChild(li)
 }
+
 
 secretbutton.addEventListener("click", () => {
     var input = btoa(secretinput.value)
 
     if(input in secrets) {
+        console.log(input)
+
+        var seensofar = window.localStorage.getItem("seensecrets")
+        if(seensofar === null) seensofar = ""
+        
+        var split = seensofar.split(",")
+        split.pop()
+
+        if(!split.includes(input)) {
+            console.log("thats a new one")
+            seensofar += `${input},`
+
+            window.localStorage.setItem("seensecrets", seensofar)
+        }
+
         window.location.href = atob(secrets[input])
     } else {
         erraudio.currentTime = 0
         erraudio.play()
-        err.style.display = "block"
+        err.style.visibility = "visible"
         setTimeout(function() {
-            err.style.display = "none"
+            err.style.visibility = "hidden"
         }, 2000)
     }
 })
