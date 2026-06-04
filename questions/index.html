@@ -1,0 +1,114 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/shared/css/style.css">
+        <link rel="icon" type="image/png" href="/shared/img/DarcyIcon.png">
+    
+        <title>Don's Residence</title>
+
+        <style>
+            .date {
+                color: purple;
+                font-weight: bolder;
+
+                font-size: .8em;
+                font-style: italic;
+                
+                transform: translate(-50%, -20%);
+            }
+            .question {
+                color: greenyellow;
+            }
+
+            ul {
+                padding: 0;
+                margin: 0;
+            }
+            li {
+                padding: 0;
+                margin: 0;
+            }
+
+            #answered {
+                font-size: 1.5rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>questions</h1>
+        <hr>
+        <a href="ask/">
+            <h5>ask the big don a question</h5>
+        </a>
+        <br><br>
+        
+        <div id="answered">
+            loading questions...
+        </div>
+    </body>
+</html>
+
+<script src="/shared/js/topbar.js"></script>
+<script>
+    const ANSWERED = document.getElementById("answered")
+    const TOGET = "https://phil.kayladotcom.org/askdon"
+
+    async function getquestions() {
+        await fetch(TOGET).then((data) => data.json()).then((data) => {
+            if(data.length == 0) {
+                ANSWERED.innerHTML = "no questions yet! you could be the first!"
+                return
+            }
+            ANSWERED.innerHTML = ""
+            
+            let ul = document.createElement("ul")
+                ul.style.listStyleType = "none"
+            for(answered of data) {
+                let li = document.createElement("li")
+
+                let qdiv = document.createElement("div")
+                    qdiv.style.display = "flex"
+                    qdiv.style.flexDirection = "column"
+
+                let time = answered.askdate // from python, this is just time.time()
+                let formatted = new Date(time * 1000).toLocaleString("en-US", {
+                    // outputs like MM/DD/YY @ HH:MM
+                    
+                    month: "numeric",
+                    day: "numeric",
+                    year: "numeric",
+
+                    hour: "numeric",
+                    minute: "numeric",
+                }).replace(", ", " @ ")
+
+                console.log(formatted)
+
+                qdiv.innerHTML = `
+                    <span class="date">
+                        ${formatted}
+                    </span>
+                    <span class="question">
+                        ${answered.question}
+                    </span>
+                `
+        
+                let divider = document.createElement("p")
+                    divider.style.color = "purple"
+                    divider.style.margin = 0
+                    divider.innerHTML = "---"
+                qdiv.append(divider)
+                qdiv.append(answered.answer)
+                
+                li.appendChild(qdiv)
+                ul.appendChild(li)
+                
+                ul.appendChild(document.createElement("br"))
+                ul.appendChild(document.createElement("br"))
+            }
+            ANSWERED.appendChild(ul)
+        })
+    }
+
+    getquestions()
+</script>

@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/shared/css/style.css">
+        <link rel="icon" type="image/png" href="/shared/img/DarcyIcon.png">
+        
+        <title>Don's Residence</title>
+        
+        <style>
+            #questioninput {
+                width: 30%;
+                height: 20%;
+                
+                padding: .5%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>ask the big don a question</h1>
+        <hr>
+        <textarea id="questioninput" placeholder="enter question"></textarea>
+        <br><br>
+        <button id="sendquestion">send question</button>
+    </body>
+</html>
+
+<script src="/shared/js/topbar.js"></script>
+<script>
+    const INPUT = document.getElementById("questioninput")
+    const SEND = document.getElementById("sendquestion")
+    
+    const SENDTO = "https://phil.kayladotcom.org/askdon"
+    
+    SEND.addEventListener("click", async () => {
+        if(INPUT.value.length > 0) {
+            INPUT.remove()
+            SEND.remove()
+            
+            let alert = document.createElement("h3")
+            
+            await fetch(SENDTO, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    question: INPUT.value
+                })
+            }).then((data) => {
+                if(data.status == 200) {
+                    alert.innerHTML = "question sent!"
+                } else {
+                    alert.innerHTML = "question could not be sent!"
+                }
+            })
+            
+            document.body.appendChild(alert)
+
+            let a = document.createElement("a")
+                a.href = "../"
+                a.innerHTML = "go back"
+
+                document.body.appendChild(a)
+        }
+    })
+</script>
