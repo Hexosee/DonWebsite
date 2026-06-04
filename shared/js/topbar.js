@@ -13,7 +13,8 @@ let toadd = [
     new Social("roblox", "https://www.roblox.com/users/349593445/profile"),
     new Social("comms", "/comms"),
     new Social("dni", "/dni"),
-    new Social("games", "/games/runner")
+    new Social("games", "/games/runner"),
+    new Social("ask", "/questions")
 ]
 
 // marquee texts
