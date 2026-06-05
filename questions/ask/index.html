@@ -51,7 +51,12 @@
                 if(data.status == 200) {
                     alert.innerHTML = "question sent!"
                 } else {
-                    alert.innerHTML = "question could not be sent!"
+                    if(data.status == 429) {
+                        // rate limited
+                        alert.innerHTML = "you are asking questions too quickly!<br>try again later!"
+                    } else {
+                        alert.innerHTML = "question could not be sent!"
+                    }
                 }
             })
             
