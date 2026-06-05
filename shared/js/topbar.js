@@ -47,6 +47,7 @@ let canpick = [
     '<img src="/shared/img/topbar/gamemakererror.png" style="height: 8vh">',
     '<img src="/shared/img/topbar/malcom.png" style="height: 8vh" width="250">',
     '<img src="/shared/img/topbar/adobeanimate.png" style="height: 8vh">',
+    '<span style="color: rgb(219, 21, 21)">cass</span> ill kill you, you you YOU.',
 
     // ones i added
     "fart mode: TRUE",
