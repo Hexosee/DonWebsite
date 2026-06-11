@@ -6,7 +6,11 @@ const RECIEVE_SOUND = document.createElement("audio")
 const CHATROOM_ENDPOINT = "https://phil.kayladotcom.org/donchatroom"
 const PING_INTERVAL = 5000
 
+let connected = true
+
 // chat room elements
+let root = document.getElementById("chatroomroot")
+
 let nameinput = document.getElementById("chatroomnameinput")
 let iconselect = document.getElementById("iconselect")
 let iconimg = document.getElementById("selicon")
@@ -110,8 +114,8 @@ history.scrollTop = history.scrollHeight
 
 
 // set up interactions
-input.addEventListener('keydown', (e)=>{
-    if(e.key === "Enter") {
+input.addEventListener('keydown', async (e)=>{
+    if(connected && e.key === "Enter") {
         e.preventDefault()
         
         let text = input.value.trim()
@@ -133,13 +137,18 @@ input.addEventListener('keydown', (e)=>{
             time: Date.now() / 1000
         }
         
-        fetch(CHATROOM_ENDPOINT + "/send", {
+        const response = await fetch(CHATROOM_ENDPOINT + "/send", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(message)
         })
+
+        if(!response.ok) {
+            alert("Failed to send message")
+            return
+        }
         
         input.value = ""
         
@@ -186,25 +195,53 @@ iconselect.addEventListener("click", () => {
 // how this is gonna work:
 // when u send a message, it renders immediately
 // every n seconds, ping the chatroom endpoint. 
+let lastsuccessfulping = Date.now()
 
-function refreshmessages() {
-    fetch(CHATROOM_ENDPOINT + "/messages").then(res => res.json()).then(messages => {
-        let added = false
+async function refreshmessages() {
+    try {
+        const response = await fetch(CHATROOM_ENDPOINT + "/messages")
+
+        if(!response.ok) {
+            throw new Error("Network response was not ok")
+        }
+
+        const messages = await response.json()
         for(message of messages) {
-            if(document.getElementById(message.id)) {
-                continue
+            let added = false
+            for(message of messages) {
+                if(document.getElementById(message.id)) {
+                    continue
+                }
+                console.log("found message that we havent added yet: " + message.text)
+                added = true
+                rendermessage(message)
             }
-            console.log("found message that we havent added yet: " + message.text)
-            added = true
-            rendermessage(message)
+            
+            if(added) {
+                RECIEVE_SOUND.play()
+                history.scrollTop = history.scrollHeight
+            }
         }
-        
-        if(added) {
-            RECIEVE_SOUND.play()
-            history.scrollTop = history.scrollHeight
+
+        lastsuccessfulping = Date.now()
+    } catch(e) {
+        console.log("failed to pign server " + lastsuccessfulping)
+        if(Date.now() - lastsuccessfulping > PING_INTERVAL * 5) {
+            alert("Lost connection to chatroom server, refresh the tab?")
+            connected = false
+
+            root.replaceChildren()
+
+            let downnotice = document.createElement("p")
+                downnotice.textContent = "lost connection: refresh the page"
+                downnotice.className = "downnotice"
+
+            root.appendChild(downnotice)
         }
-    })
-    
-    setTimeout(refreshmessages, PING_INTERVAL)
+    }
+
+    if(connected) {
+        setTimeout(refreshmessages, PING_INTERVAL)
+    }
 }
 refreshmessages()
