@@ -114,6 +114,33 @@ function disconnect() {
     root.appendChild(downnotice)
 }
 
+function savestuff(name, icon) {
+    window.localStorage.setItem("chatroom-profile", JSON.stringify({
+        name: name,
+        icon: icon
+    }))
+}
+function saveifnosaveexists(name, icon) {
+    if(window.localStorage.getItem("chatroom-profile") === null) {
+        savestuff(name, icon)
+    }
+}
+
+function loadstuff() {
+    let saved = window.localStorage.getItem("chatroom-profile")
+
+    if(saved !== null) {
+        try {
+            let parsed = JSON.parse(saved)
+            if('name' in parsed && 'icon' in parsed) {
+                return parsed
+            }
+        } catch(e) {
+            console.log("failed to parse saved profile")
+        }
+    }
+}
+
 // chat room vars
 let nameadjectives = [
     "Smelly",
@@ -145,11 +172,20 @@ name = adj + noun
 
 let icon = Math.floor(Math.random() * 5)
 
+// load stuff if it exists
+let loaded = loadstuff()
+if(loaded !== undefined) {
+    name = loaded.name
+    icon = loaded.icon
+}
+
+// save the defaults
+saveifnosaveexists(name, icon)
+
 // set up the defaults
 nameinput.value = name
 iconimg.src = `img/icons/icon${icon + 1}.png`
 history.scrollTop = history.scrollHeight
-
 
 // set up interactions
 input.addEventListener('keydown', async (e)=>{
@@ -234,12 +270,16 @@ nameinput.addEventListener('input', (e) => {
         icon = 0
         iconimg.src = `img/icons/icon${icon + 1}.png`
     }
+
+    savestuff(name, icon)
 })
 
 iconselect.addEventListener("click", () => {
     if(usingspecial) return
     icon = (icon + 1) % 5
     iconimg.src = `img/icons/icon${icon + 1}.png`
+
+    savestuff(name, icon)
 })
 
 

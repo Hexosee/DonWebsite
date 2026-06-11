@@ -16,9 +16,14 @@ function checkstatus() {
             chatroomroot.innerHTML = `
                 <div id="philbanner">
                     <img src="img/icons/iconphil.png">
-                    <p id="philtopic">
-                        CHAT TOPIC: loading...
-                    </p>
+                    <div id="philcontainer">
+                        <p id="philtopic">
+                            CHAT TOPIC: loading...
+                        </p>
+                        <p id="philfooter">
+                            chat topics are just suggestions! talk about whatever you want!
+                        </p>
+                    </div>
                 </div>
 
                 <div id="chatroomhistory">
