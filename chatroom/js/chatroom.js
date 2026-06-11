@@ -99,6 +99,7 @@ input.addEventListener('keydown', (e)=>{
         history.appendChild(p)
         
         SEND_SOUND.play()
+        history.scrollTop = history.scrollHeight
     }
 })
 
