@@ -14,6 +14,13 @@ function checkstatus() {
             `
         } else {
             chatroomroot.innerHTML = `
+                <div id="philbanner">
+                    <img src="img/icons/iconphil.png">
+                    <p id="philtopic">
+                        CHAT TOPIC: loading...
+                    </p>
+                </div>
+
                 <div id="chatroomhistory">
                     
                 </div>

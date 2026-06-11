@@ -2,6 +2,8 @@ const SEND_SOUND = document.createElement("audio")
     SEND_SOUND.src = "sound/send.mp3"
 const RECIEVE_SOUND = document.createElement("audio")
     RECIEVE_SOUND.src = "sound/recieve.mp3"
+const NEW_TOPIC_SOUND = document.createElement("audio")
+    NEW_TOPIC_SOUND.src = "sound/topic.mp3"
 
 const CHATROOM_ENDPOINT = "https://phil.kayladotcom.org/donchatroom"
 const PING_INTERVAL = 5000
@@ -17,6 +19,8 @@ let iconimg = document.getElementById("selicon")
 
 let history = document.getElementById("chatroomhistory")
 let input = document.getElementById("chatroominput")
+
+let topic = document.getElementById("philtopic")
 
 // stuff
 let specialnames = {
@@ -236,6 +240,8 @@ iconselect.addEventListener("click", () => {
 // when u send a message, it renders immediately
 // every n seconds, ping the chatroom endpoint. 
 let lastsuccessfulping = Date.now()
+let loadedinitialmessages = false
+let knowntopic = undefined
 
 async function refreshmessages() {
     try {
@@ -245,7 +251,17 @@ async function refreshmessages() {
             throw new Error("Network response was not ok")
         }
 
-        const messages = await response.json()
+        const json = await response.json()
+
+        const newtopic = json.topic
+        if(newtopic !== knowntopic) {
+            topic.textContent = `CHAT TOPIC: ${newtopic}`
+
+            knowntopic = newtopic
+            if(loadedinitialmessages) NEW_TOPIC_SOUND.play()
+        }
+
+        const messages = json.messages
         for(message of messages) {
             let added = false
             for(message of messages) {
@@ -258,7 +274,7 @@ async function refreshmessages() {
             }
             
             if(added) {
-                RECIEVE_SOUND.play()
+                if(loadedinitialmessages) RECIEVE_SOUND.play()
                 history.scrollTop = history.scrollHeight
             }
         }
@@ -276,4 +292,10 @@ async function refreshmessages() {
         setTimeout(refreshmessages, PING_INTERVAL)
     }
 }
-refreshmessages()
+
+async function init() {
+    await refreshmessages()
+    loadedinitialmessages = true
+}
+
+init()
