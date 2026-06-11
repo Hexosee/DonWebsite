@@ -171,7 +171,8 @@ input.addEventListener('keydown', async (e)=>{
             name: name,
             icon: icon,
             text: text,
-            id: id
+            id: id,
+            time: Date.now() / 1000
         }
         
         const response = await fetch(CHATROOM_ENDPOINT + "/send", {
