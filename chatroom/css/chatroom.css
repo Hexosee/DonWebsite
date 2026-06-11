@@ -5,6 +5,8 @@ body, #marq {
     background-image: none;
     background-color: black;
     color: lime;
+
+    overflow: hidden;
 }
 
 h1 {
