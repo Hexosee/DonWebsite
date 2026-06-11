@@ -167,10 +167,10 @@ function refreshmessages() {
             
             history.appendChild(p)
         }
-        history.scrollTop = history.scrollHeight
         
         if(added) {
             RECIEVE_SOUND.play()
+            history.scrollTop = history.scrollHeight
         }
     })
     
