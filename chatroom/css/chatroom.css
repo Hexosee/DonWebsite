@@ -7,6 +7,7 @@ body, #marq {
     color: lime;
 
     overflow: hidden;
+    font-family: monospace;
 }
 
 h1 {
