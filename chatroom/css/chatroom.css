@@ -101,6 +101,11 @@ h1 {
 
     border-bottom: 1px dashed #ff7700;
 }
+.chat.systemchat {
+    color: #FF3FEE;
+
+    border-bottom: 1px dashed #FF3FEE;
+}
 
 .chatmain {
     width: 90%;

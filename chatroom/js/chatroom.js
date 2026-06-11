@@ -29,7 +29,9 @@ let specialnames = {
 }
 let specialclasses = {
     6: 'donaldchat',
-    7: 'kaylachat'
+    7: 'kaylachat',
+
+    0: 'systemchat'
 }
 
 // funcs
@@ -58,6 +60,10 @@ function rendermessage(message) {
     
     let icon = document.createElement("img")
         icon.src = `img/icons/icon${message.icon + 1}.png`
+        if(message.icon === -1) {
+            // system message
+            icon.src = "img/icons/iconphil.png"
+        }
     let text = document.createElement("p")
         text.textContent = `<${message.name}> ${message.text}`
     
@@ -254,14 +260,6 @@ async function refreshmessages() {
 
         const json = await response.json()
 
-        const newtopic = json.topic
-        if(newtopic !== knowntopic) {
-            topic.textContent = `CHAT TOPIC: ${newtopic}`
-
-            knowntopic = newtopic
-            if(loadedinitialmessages) NEW_TOPIC_SOUND.play()
-        }
-
         const messages = json.messages
         for(message of messages) {
             let added = false
@@ -276,6 +274,24 @@ async function refreshmessages() {
             
             if(added) {
                 if(loadedinitialmessages) RECIEVE_SOUND.play()
+                history.scrollTop = history.scrollHeight
+            }
+        }
+
+        const newtopic = json.topic
+        if(newtopic !== knowntopic) {
+            topic.textContent = `CHAT TOPIC: ${newtopic}`
+
+            knowntopic = newtopic
+            if(loadedinitialmessages) {
+                NEW_TOPIC_SOUND.play()
+
+                rendermessage({
+                    name: "SYSTEM",
+                    icon: -1,
+                    text: `CHAT TOPIC: "${newtopic}"`,
+                    time: Date.now() / 1000
+                })
                 history.scrollTop = history.scrollHeight
             }
         }
