@@ -18,6 +18,16 @@ let iconimg = document.getElementById("selicon")
 let history = document.getElementById("chatroomhistory")
 let input = document.getElementById("chatroominput")
 
+// stuff
+let specialnames = {
+    "donaldani": 6,
+    "ms_kaylaa": 7
+}
+let specialclasses = {
+    6: 'donaldchat',
+    7: 'kaylachat'
+}
+
 // funcs
 function rendermessage(message) {
     /*
@@ -68,6 +78,12 @@ function rendermessage(message) {
         })
         
         chatside.append(time, date)
+    }
+
+    if((message.icon+1) in specialclasses) {
+        let spclass = specialclasses[(message.icon+1)]
+        
+        chat.classList.add(spclass)
     }
     
     chat.append(chatmain, chatside)
@@ -188,10 +204,6 @@ input.addEventListener('keydown', async (e)=>{
     }
 })
 
-let specialnames = {
-    "donaldani": 6,
-    "ms_kaylaa": 7
-}
 let usingspecial = false
 nameinput.addEventListener('input', (e) => {
     name = e.target.value
