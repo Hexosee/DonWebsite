@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>chat room :-)</title>
+
+        <link rel="stylesheet" href="/shared/css/style.css">
+
+        <link rel="icon" type="image/png" href="/shared/img/DarcyIcon.png">
+    
+        <style>
+            html {
+                background-color: black;
+            }
+            body, #marq {
+                background-image: none;
+                background-color: black;
+                color: lime;
+            }
+
+            h1 {
+                -webkit-text-stroke: 0px;
+                font-family: monospace;
+            }
+
+            #topbaricons {
+                filter: hue-rotate(90deg)
+            }
+
+            #chatroomroot {
+                width: 60rem;
+                height: 40rem;
+
+                background-color: black;
+                font-family: monospace;
+
+                box-sizing: border-box;
+                    border: 2px solid lime;
+
+                display: flex;
+                    flex-direction: column;
+            }
+
+            #chatroomhistory {
+                width: 100%;
+                height: 85%;
+
+                background-color: black;
+                
+                box-sizing: border-box;
+                    border-bottom: 2px solid lime;
+
+                text-align: left;
+                /* padding: 2%; */
+
+                overflow-y: scroll;
+                overflow-x: hidden;
+            }
+            .chat {
+                color: lime;
+
+                display: flex;
+                    align-items: center;
+                    /* justify-content: center; */
+
+                gap: 1%;
+                width: 100%;
+                height: 10%;
+
+                margin: 0;
+
+                box-sizing: border-box;
+                    border-bottom: 1px dashed lime;
+            }
+
+            #chatroombottom {
+                width: 100%;
+                height: 15%;
+
+                display: flex;
+
+            }
+
+            #chatroominputroot {
+                width: 80%;
+                height: 100%;
+
+                display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                background-color: black;
+            }
+            #chatroominput {
+                width: 90%;
+                height: 3rem;
+
+                background-color: black;
+                color: lime;
+
+                box-sizing: border-box;
+                    border: 1px dashed lime;
+
+                font-size: 200%;
+
+                resize: none;
+                overflow: hidden;
+            }
+
+            #chatroompersonalizeroot {
+                width: 20%;
+                height: 100%;
+
+                box-sizing: border-box;
+                    border-right: 2px solid lime;
+
+                display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5%;
+            }
+            #chatroomnameinput {
+                background-color: black;
+                color: lime;
+                border: 1px dashed lime;
+
+                font-family: monospace;
+            }
+            #chatroomnameinput::placeholder {
+                color: green;
+            }
+            #iconselect {
+                width: 4rem;
+                height: 4rem;
+
+                background-color: black;
+                border: 1px solid lime;
+
+                display: flex;
+                    align-items: center;
+                    justify-content: center;
+            }
+            #iconselect:hover {
+                background-color: lime;
+                cursor: pointer;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h1>chat room</h1>
+        <hr>
+
+        <div id="chatroomroot">
+            <div id="chatroomhistory">
+                
+            </div>
+            <div id="chatroombottom">
+                <div id="chatroompersonalizeroot">
+                    <div id="iconselect">
+                        <img id="selicon" src="img/icons/icon1.png">
+                    </div>
+                    <input type="text" id="chatroomnameinput" placeholder="NAME HERE">
+                </div>
+                <div id="chatroominputroot">
+                    <textarea id="chatroominput"></textarea>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script src="/shared/js/topbar.js"></script>
+<script>
+    const CHATROOM_ENDPOINT = "https://phil.kayladotcom.org/donchatroom"
+    const PING_INTERVAL = 5000
+
+    // chat room elements
+    let nameinput = document.getElementById("chatroomnameinput")
+    let iconselect = document.getElementById("iconselect")
+    let iconimg = document.getElementById("selicon")
+
+    let history = document.getElementById("chatroomhistory")
+    let input = document.getElementById("chatroominput")
+
+    // chat room vars
+    let nameadjectives = [
+        "Smelly",
+        "Loud",
+        "Obnoxious",
+        "Proud",
+        "Egolicious",
+        "Tuffmongus",
+        "Beautiful"
+    ]
+    let namenouns = [
+        "Foot",
+        "Priest",
+        "Friend",
+        "Feather",
+        "Tuffmongus",
+        "Stitch",
+        "Robot",
+        "Sphere",
+        "Bottle",
+        "Pen",
+        "Phone"
+    ]
+    
+    let name
+    var adj = nameadjectives[Math.floor(Math.random() * nameadjectives.length)]
+    var noun = namenouns[Math.floor(Math.random() * namenouns.length)]
+    name = adj + noun
+
+    let icon = Math.floor(Math.random() * 5)
+
+    // set up the defaults
+    nameinput.value = name
+    iconimg.src = `img/icons/icon${icon + 1}.png`
+    history.scrollTop = history.scrollHeight
+    
+
+    // set up interactions
+    iconselect.addEventListener("click", () => {
+        icon = (icon + 1) % 5
+        iconimg.src = `img/icons/icon${icon + 1}.png`
+    })
+    input.addEventListener('keydown', (e)=>{
+        if(e.key === "Enter") {
+            e.preventDefault()
+
+            let text = input.value.trim()
+            let id = crypto.randomUUID()
+
+            let message = {
+                name: name,
+                icon: icon,
+                text: text,
+                id: id
+            }
+
+            fetch(CHATROOM_ENDPOINT + "/send", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(message)
+            })
+
+            input.value = ""
+
+            // render new message
+            let p = document.createElement("p")
+            p.className = "chat"
+            p.id = message.id
+
+            let img = document.createElement("img")
+            img.src = `img/icons/icon${message.icon + 1}.png`
+            p.appendChild(img)
+
+            let textnode = document.createTextNode(`<${message.name}> ${message.text}`)
+            p.appendChild(textnode)
+
+            history.appendChild(p)
+        }
+    })
+
+    // how this is gonna work:
+    // when u send a message, it renders immediately
+    // every n seconds, ping the chatroom endpoint. 
+
+    function refreshmessages() {
+        fetch(CHATROOM_ENDPOINT + "/messages").then(res => res.json()).then(messages => {
+            for(message of messages) {
+                if(document.getElementById(message.id)) {
+                    continue
+                }
+
+                /*
+                    <p class="chat">
+                        <img src="img/icons/icon1.png">
+                        &lt;examplename&gt; hi
+                    </p>
+                */
+                let p = document.createElement("p")
+                p.className = "chat"
+                p.id = message.id
+
+                let img = document.createElement("img")
+                img.src = `img/icons/icon${message.icon + 1}.png`
+                p.appendChild(img)
+
+                let textnode = document.createTextNode(`<${message.name}> ${message.text}`)
+                p.appendChild(textnode)
+
+                history.appendChild(p)
+            }
+            history.scrollTop = history.scrollHeight
+        })
+
+        setTimeout(refreshmessages, PING_INTERVAL)
+    }
+    refreshmessages()
+</script>
