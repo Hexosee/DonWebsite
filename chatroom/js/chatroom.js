@@ -14,6 +14,64 @@ let iconimg = document.getElementById("selicon")
 let history = document.getElementById("chatroomhistory")
 let input = document.getElementById("chatroominput")
 
+// rendering msgs
+function rendermessage(message) {
+    /*
+        <div id="chatroomhistory">
+            <div class="chat">
+                <div class="chatmain">
+                    <img src="img/icons/icon1.png">
+                    <p>&lt;examplename&gt; hi</p>
+                </div>
+                
+                <div class="chatside">
+                    <p class="time">12:00am</p>
+                    <p class="time">12/12/12</p>
+                </div>
+            </div>
+        </div>
+    */
+    let chat = document.createElement("div")
+        chat.className = "chat"
+        chat.id = message.id
+    
+    let chatmain = document.createElement("div")
+        chatmain.className = "chatmain"
+    
+    let icon = document.createElement("img")
+        icon.src = `img/icons/icon${message.icon + 1}.png`
+    let text = document.createElement("p")
+        text.textContent = `<${message.name}> ${message.text}`
+    
+    let chatside = document.createElement("div")
+        chatside.className = "chatside"
+    
+    if('time' in message) {
+        let time = document.createElement("p")
+            time.className = "time"
+        let date = document.createElement("p")
+            date.className = "time"
+        
+        let messageDate = new Date(message.time * 1000)
+        time.textContent = messageDate.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit'
+        })
+        date.textContent = messageDate.toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: '2-digit'
+        })
+        
+        chatside.append(time, date)
+    }
+    
+    chat.append(chatmain, chatside)
+    chatmain.append(icon, text)
+    
+    history.appendChild(chat)
+}
+
 // chat room vars
 let nameadjectives = [
     "Smelly",
@@ -71,7 +129,8 @@ input.addEventListener('keydown', (e)=>{
             name: name,
             icon: icon,
             text: text,
-            id: id
+            id: id,
+            time: Date.now() / 1000
         }
         
         fetch(CHATROOM_ENDPOINT + "/send", {
@@ -85,18 +144,7 @@ input.addEventListener('keydown', (e)=>{
         input.value = ""
         
         // render new message
-        let p = document.createElement("p")
-        p.className = "chat"
-        p.id = message.id
-        
-        let img = document.createElement("img")
-        img.src = `img/icons/icon${message.icon + 1}.png`
-        p.appendChild(img)
-        
-        let textnode = document.createTextNode(`<${message.name}> ${message.text}`)
-        p.appendChild(textnode)
-        
-        history.appendChild(p)
+        rendermessage(message)
         
         SEND_SOUND.play()
         history.scrollTop = history.scrollHeight
@@ -146,26 +194,9 @@ function refreshmessages() {
             if(document.getElementById(message.id)) {
                 continue
             }
+            console.log("found message that we havent added yet: " + message.text)
             added = true
-            
-            /*
-                <p class="chat">
-                <img src="img/icons/icon1.png">
-                &lt;examplename&gt; hi
-                </p>
-            */
-            let p = document.createElement("p")
-            p.className = "chat"
-            p.id = message.id
-            
-            let img = document.createElement("img")
-            img.src = `img/icons/icon${message.icon + 1}.png`
-            p.appendChild(img)
-            
-            let textnode = document.createTextNode(`<${message.name}> ${message.text}`)
-            p.appendChild(textnode)
-            
-            history.appendChild(p)
+            rendermessage(message)
         }
         
         if(added) {
