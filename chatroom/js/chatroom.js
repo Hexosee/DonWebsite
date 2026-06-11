@@ -18,7 +18,7 @@ let iconimg = document.getElementById("selicon")
 let history = document.getElementById("chatroomhistory")
 let input = document.getElementById("chatroominput")
 
-// rendering msgs
+// funcs
 function rendermessage(message) {
     /*
         <div id="chatroomhistory">
@@ -74,6 +74,18 @@ function rendermessage(message) {
     chatmain.append(icon, text)
     
     history.appendChild(chat)
+}
+
+function disconnect() {
+    connected = false
+
+    root.replaceChildren()
+
+    let downnotice = document.createElement("p")
+        downnotice.textContent = "lost connection: refresh the page"
+        downnotice.className = "downnotice"
+
+    root.appendChild(downnotice)
 }
 
 // chat room vars
@@ -151,7 +163,20 @@ input.addEventListener('keydown', async (e)=>{
         })
 
         if(!response.ok) {
-            alert("Failed to send message")
+            switch(response.status) {
+                case 503:
+                    alert("The chatroom service is currently offline")
+                    disconnect()
+                break
+
+                case 429:
+                    alert("You are sending messages too quickly")
+                break
+
+                default:
+                    alert("Failed to send message")
+                break
+            }
             return
         }
         
@@ -231,15 +256,7 @@ async function refreshmessages() {
         console.log("failed to pign server " + lastsuccessfulping)
         if(Date.now() - lastsuccessfulping > PING_INTERVAL * 5) {
             alert("Lost connection to chatroom server, refresh the tab?")
-            connected = false
-
-            root.replaceChildren()
-
-            let downnotice = document.createElement("p")
-                downnotice.textContent = "lost connection: refresh the page"
-                downnotice.className = "downnotice"
-
-            root.appendChild(downnotice)
+            disconnect()
         }
     }
 
