@@ -14,7 +14,8 @@ let toadd = [
     new Social("comms", "/comms"),
     new Social("dni", "/dni"),
     new Social("games", "/games/runner"),
-    new Social("ask", "/questions")
+    new Social("ask", "/questions"),
+    new Social("chat", "/chatroom")
 ]
 
 // marquee texts
