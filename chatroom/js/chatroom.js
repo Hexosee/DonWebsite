@@ -119,6 +119,12 @@ input.addEventListener('keydown', async (e)=>{
         e.preventDefault()
         
         let text = input.value.trim()
+        if(text.length === 0) {
+            alert("You cannot send an empty message")
+            return
+        }
+        input.value = ""
+
         let id = crypto.randomUUID()
         
         if(name.length == 0) {
@@ -133,8 +139,7 @@ input.addEventListener('keydown', async (e)=>{
             name: name,
             icon: icon,
             text: text,
-            id: id,
-            time: Date.now() / 1000
+            id: id
         }
         
         const response = await fetch(CHATROOM_ENDPOINT + "/send", {
@@ -149,8 +154,6 @@ input.addEventListener('keydown', async (e)=>{
             alert("Failed to send message")
             return
         }
-        
-        input.value = ""
         
         // render new message
         rendermessage(message)
