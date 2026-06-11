@@ -1,0 +1,136 @@
+html {
+    background-color: black;
+}
+body, #marq {
+    background-image: none;
+    background-color: black;
+    color: lime;
+}
+
+h1 {
+    -webkit-text-stroke: 0px;
+    font-family: monospace;
+}
+
+#topbaricons {
+    filter: hue-rotate(90deg)
+}
+
+#chatroomroot {
+    width: 80rem;
+    height: 40rem;
+    
+    background-color: black;
+    font-family: monospace;
+    
+    box-sizing: border-box;
+    border: 2px solid lime;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+#chatroomhistory {
+    width: 100%;
+    height: 85%;
+    
+    background-color: black;
+    
+    box-sizing: border-box;
+    border-bottom: 2px solid lime;
+    
+    text-align: left;
+    /* padding: 2%; */
+    
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.chat {
+    color: lime;
+    
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    
+    gap: 1%;
+    width: 100%;
+    height: 10%;
+    
+    margin: 0;
+    
+    box-sizing: border-box;
+    border-bottom: 1px dashed lime;
+}
+
+#chatroombottom {
+    width: 100%;
+    height: 15%;
+    
+    display: flex;
+    
+}
+
+#chatroominputroot {
+    width: 80%;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: black;
+}
+#chatroominput {
+    width: 90%;
+    height: 3rem;
+    
+    background-color: black;
+    color: lime;
+    
+    box-sizing: border-box;
+    border: 1px dashed lime;
+    
+    font-size: 200%;
+    
+    resize: none;
+    overflow: hidden;
+}
+
+#chatroompersonalizeroot {
+    width: 20%;
+    height: 100%;
+    
+    box-sizing: border-box;
+    border-right: 2px solid lime;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+#chatroomnameinput {
+    background-color: black;
+    color: lime;
+    border: 1px dashed lime;
+    
+    font-family: monospace;
+}
+#chatroomnameinput::placeholder {
+    color: green;
+}
+#iconselect {
+    width: 4rem;
+    height: 4rem;
+    
+    background-color: black;
+    border: 1px solid lime;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#iconselect:hover {
+    background-color: lime;
+    cursor: pointer;
+}
