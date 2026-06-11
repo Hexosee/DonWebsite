@@ -52,10 +52,6 @@ history.scrollTop = history.scrollHeight
 
 
 // set up interactions
-iconselect.addEventListener("click", () => {
-    icon = (icon + 1) % 5
-    iconimg.src = `img/icons/icon${icon + 1}.png`
-})
 input.addEventListener('keydown', (e)=>{
     if(e.key === "Enter") {
         e.preventDefault()
@@ -63,6 +59,14 @@ input.addEventListener('keydown', (e)=>{
         let text = input.value.trim()
         let id = crypto.randomUUID()
         
+        if(name.length == 0) {
+            var adj = nameadjectives[Math.floor(Math.random() * nameadjectives.length)]
+            var noun = namenouns[Math.floor(Math.random() * namenouns.length)]
+            name = adj + noun
+
+            nameinput.value = name
+        }
+
         let message = {
             name: name,
             icon: icon,
@@ -97,9 +101,37 @@ input.addEventListener('keydown', (e)=>{
         SEND_SOUND.play()
     }
 })
+
+let specialnames = {
+    "donaldani": 6,
+    "ms_kaylaa": 7
+}
+let usingspecial = false
 nameinput.addEventListener('input', (e) => {
     name = e.target.value
-});
+
+    let usinglastspecial = usingspecial
+    usingspecial = false
+    for(special of Object.keys(specialnames)) {
+        if(name.toLowerCase() === special) {
+            icon = specialnames[special] - 1
+            iconimg.src = `img/icons/icon${icon + 1}.png`
+
+            usingspecial = true
+        }
+    }
+
+    if(!usingspecial && usinglastspecial) {
+        icon = 0
+        iconimg.src = `img/icons/icon${icon + 1}.png`
+    }
+})
+
+iconselect.addEventListener("click", () => {
+    if(usingspecial) return
+    icon = (icon + 1) % 5
+    iconimg.src = `img/icons/icon${icon + 1}.png`
+})
 
 
 // how this is gonna work:
