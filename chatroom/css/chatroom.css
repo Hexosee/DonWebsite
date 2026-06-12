@@ -107,31 +107,6 @@ h1 {
     display: flex;
         flex-direction: row;
 }
-.chat.kaylachat {
-    color: #ff9ac1;
-
-    border-bottom: 1px dashed #ff9ac1;
-}
-.chat.donaldchat {
-    color: #ff7700;
-
-    border-bottom: 1px dashed #ff7700;
-}
-.chat.ukubabechat {
-    color: #575799;
-
-    border-bottom: 1px dashed #575799;
-}
-.chat.paintchat {
-    color: #1c2dc5;
-
-    border-bottom: 1px dashed #1c2dc5;
-}
-.chat.systemchat {
-    color: #FF3FEE;
-
-    border-bottom: 1px dashed #FF3FEE;
-}
 
 .chatmain {
     width: 90%;

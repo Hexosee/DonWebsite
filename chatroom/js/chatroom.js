@@ -1,14 +1,15 @@
+// constants
+const CHATROOM_ENDPOINT = "https://phil.kayladotcom.org/donchatroom"
+const PING_INTERVAL = 5000
+const SAVE_DATA_KEY = "chatroom-profile"
+
+// sounds
 const SEND_SOUND = document.createElement("audio")
     SEND_SOUND.src = "sound/send.mp3"
 const RECIEVE_SOUND = document.createElement("audio")
     RECIEVE_SOUND.src = "sound/recieve.mp3"
 const NEW_TOPIC_SOUND = document.createElement("audio")
     NEW_TOPIC_SOUND.src = "sound/topic.mp3"
-
-const CHATROOM_ENDPOINT = "https://phil.kayladotcom.org/donchatroom"
-const PING_INTERVAL = 5000
-
-let connected = true
 
 // chat room elements
 let root = document.getElementById("chatroomroot")
@@ -20,184 +21,231 @@ let iconimg = document.getElementById("selicon")
 let history = document.getElementById("chatroomhistory")
 let input = document.getElementById("chatroominput")
 
-let topic = document.getElementById("philtopic")
+let topicdisplay = document.getElementById("philtopic")
 
-// stuff
-let specialnames = {
-    "donaldani": -1,
-    "ms_kaylaa": -2,
-    "ukubabe": -3,
-    "paint": -4
-}
-let specialclasses = {
-    [-1]: 'donaldchat',
-    [-2]: 'kaylachat',
-    [-3]: 'ukubabechat',
-    [-4]: 'paintchat',
+// special name stuff
+let spidx = 0
+class SpecialName {
+    constructor(color, notifsound) {
+        this.icon = --spidx
+        this.color = color
 
-    0: 'systemchat'
-}
-
-// funcs
-function rendermessage(message) {
-    /*
-        <div id="chatroomhistory">
-            <div class="chat">
-                <div class="chatmain">
-                    <img src="img/icons/icon1.png">
-                    <p>&lt;examplename&gt; hi</p>
-                </div>
-                
-                <div class="chatside">
-                    <p class="time">12:00am</p>
-                    <p class="time">12/12/12</p>
-                </div>
-            </div>
-        </div>
-    */
-    let chat = document.createElement("div")
-        chat.className = "chat"
-        chat.id = message.id
-    
-    let chatmain = document.createElement("div")
-        chatmain.className = "chatmain"
-    
-    let icon = document.createElement("img")
-        icon.src = `img/icons/icon${message.icon + 1}.png`
-        if(message.icon === -1) {
-            // system message
-            icon.src = "img/icons/iconphil.png"
+        if(notifsound !== undefined) {
+            this.notifsound = document.createElement("audio")
+                this.notifsound.src = `sound/special/${notifsound}.mp3`
         }
-    let text = document.createElement("p")
-        text.textContent = `<${message.name}> ${message.text}`
-    
-    let chatside = document.createElement("div")
-        chatside.className = "chatside"
-    
-    if('time' in message) {
-        let time = document.createElement("p")
-            time.className = "time"
-        let date = document.createElement("p")
-            date.className = "time"
-        
-        let messageDate = new Date(message.time * 1000)
-        time.textContent = messageDate.toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit'
-        })
-        date.textContent = messageDate.toLocaleDateString('en-US', {
-            month: '2-digit',
-            day: '2-digit',
-            year: '2-digit'
-        })
-        
-        chatside.append(time, date)
     }
 
-    if((message.icon+1) in specialclasses) {
-        let spclass = specialclasses[(message.icon+1)]
-        
-        chat.classList.add(spclass)
+    getcss() {
+        return `
+            color: ${this.color};
+            border-bottom: 1px dashed ${this.color};
+        `
     }
-    
-    chat.append(chatmain, chatside)
-    chatmain.append(icon, text)
-    
-    history.appendChild(chat)
-}
 
-function disconnect() {
-    connected = false
+    getnotifsound() {
+        if(this.notifsound) {
+            return this.notifsound
+        }
 
-    root.replaceChildren()
-
-    let downnotice = document.createElement("p")
-        downnotice.textContent = "lost connection: refresh the page"
-        downnotice.className = "downnotice"
-
-    root.appendChild(downnotice)
-}
-
-function savestuff(name, icon) {
-    window.localStorage.setItem("chatroom-profile", JSON.stringify({
-        name: name,
-        icon: icon
-    }))
-}
-function saveifnosaveexists(name, icon) {
-    if(window.localStorage.getItem("chatroom-profile") === null) {
-        savestuff(name, icon)
+        return RECIEVE_SOUND
     }
 }
 
-function loadstuff() {
-    let saved = window.localStorage.getItem("chatroom-profile")
+// you need to add in order of the icons, descending. e.g.:
+const namemap = {
+    "donaldani": new SpecialName('#ff7700', 'donaldrecieve'), // this is -1
+    "ms_kaylaa": new SpecialName('#ff72c0', 'kaylarecieve'), // this is -2
+    "ukubabe": new SpecialName('#575799', 'ukurecieve'), // this is -3
+    "paint": new SpecialName('#1c2dc5', 'paintrecieve') // etc
+}
 
-    if(saved !== null) {
-        try {
-            let parsed = JSON.parse(saved)
-            if('name' in parsed && 'icon' in parsed) {
-                return parsed
+// chatroom vars
+let name = "PoopFart"
+let icon = 0
+let usingspecial = false
+let maxicon = 7
+
+let knowntopic = ""
+
+let connected = true
+let lastsuccessfulping = Date.now()
+
+let loadedinitialmessages = false
+
+let nameadjectives = []
+let namenouns = []
+
+// load from file
+fetch("js/autogennames/adjectives.txt").then(res => res.text()).then(data => {
+    nameadjectives = data.split("\n").filter(line => line.trim().replaceAll("\r", "").length > 0)
+    nameadjectives = nameadjectives.map(line => line.replaceAll("\r", ""))
+})
+fetch("js/autogennames/nouns.txt").then(res => res.text()).then(data => {
+    namenouns = data.split("\n").filter(line => line.trim().length > 0)
+    namenouns = namenouns.map(line => line.replaceAll("\r", ""))
+})
+
+// functions
+    function disconnect() {
+        connected = false
+
+        root.replaceChildren()
+
+        let downnotice = document.createElement("p")
+            downnotice.textContent = "lost connection: refresh the page"
+            downnotice.className = "downnotice"
+
+        root.appendChild(downnotice)
+    }
+
+    function sanitizetextHTMLsafe(text) {
+        return text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+    }
+
+    function rendermessage(messagedata) {
+        let chat = document.createElement("div")
+            chat.className = "chat"
+            chat.id = messagedata.id
+
+            let special = checkifspecial(messagedata.name)
+            if(special) {
+                chat.style = special.getcss()
+                messagedata.icon = special.icon
             }
-        } catch(e) {
-            console.log("failed to parse saved profile")
+
+            let system = 'system' in messagedata
+
+            let chatmain = document.createElement("div")
+                chatmain.className = "chatmain"
+
+                let icon = document.createElement("img")
+                    icon.src = formaticonid(messagedata.icon)
+
+                    if(system) {
+                        icon.src = formaticonid("phil")
+                        chat.classList.add("systemchat")
+                    }
+
+                let text = document.createElement("p")
+                    text.innerHTML = `&lt;${messagedata.name}&gt; ${sanitizetextHTMLsafe(messagedata.text).replaceAll(name, `<span style="color: yellow;">${name}</span>`)}`
+
+                chatmain.append(icon, text)
+            chat.append(chatmain)
+
+            let chatside = document.createElement("div")
+                chatside.className = "chatside"
+
+                let time = document.createElement("p")
+                    time.className = "time"
+                let date = document.createElement("p")
+                    date.className = "time"
+                
+                let messageDate = new Date(messagedata.time * 1000)
+                time.textContent = messageDate.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })
+                date.textContent = messageDate.toLocaleDateString('en-US', {
+                    month: '2-digit',
+                    day: '2-digit',
+                    year: '2-digit'
+                })
+                
+                chatside.append(time, date)
+            chat.append(chatside)
+
+        history.appendChild(chat)
+
+        history.scrollTop = history.scrollHeight
+    }
+
+    function settopic(newtopic) {
+        knowntopic = newtopic
+        topicdisplay.textContent = `CHAT TOPIC: ${newtopic}`
+
+        if(loadedinitialmessages) {
+            NEW_TOPIC_SOUND.play()
+            
+            rendermessage({
+                name: "SYSTEM",
+                icon: 0,
+                text: `CHAT TOPIC: ${newtopic}`,
+                time: Date.now() / 1000,
+                system: true,
+                id: crypto.randomUUID()
+            })
         }
     }
-}
 
-// chat room vars
-let nameadjectives = [
-    "Smelly",
-    "Loud",
-    "Obnoxious",
-    "Proud",
-    "Egolicious",
-    "Tuffmongus",
-    "Beautiful"
-]
-let namenouns = [
-    "Foot",
-    "Priest",
-    "Friend",
-    "Feather",
-    "Tuffmongus",
-    "Stitch",
-    "Robot",
-    "Sphere",
-    "Bottle",
-    "Pen",
-    "Phone"
-]
+    // name funcs
+        function generaterandomname() {
+            let adj = nameadjectives[Math.floor(Math.random() * nameadjectives.length)]
+            let noun = namenouns[Math.floor(Math.random() * namenouns.length)]
 
-let name
-var adj = nameadjectives[Math.floor(Math.random() * nameadjectives.length)]
-var noun = namenouns[Math.floor(Math.random() * namenouns.length)]
-name = adj + noun
+            return adj + noun
+        }
 
-let icon = Math.floor(Math.random() * 5)
+        function setname(newname) {
+            name = newname
+            nameinput.value = newname
+        }
 
-// load stuff if it exists
-let loaded = loadstuff()
-if(loaded !== undefined) {
-    name = loaded.name
-    icon = loaded.icon
-}
+        function checkifspecial(name) {
+            if(name.toLowerCase() in namemap) {
+                return namemap[name.toLowerCase()]
+            }
+            return false
+        }
 
-// save the defaults
-saveifnosaveexists(name, icon)
+    // icon funcs
+        function formaticonid(id) {
+            return `img/icons/icon${id}.png`
+        }
 
-// set up the defaults
-nameinput.value = name
-iconimg.src = `img/icons/icon${icon + 1}.png`
-history.scrollTop = history.scrollHeight
+        function getrandomicon() {
+            return Math.floor(Math.random() * (maxicon + 1))
+        }
 
-// set up interactions
+        function seticon(newicon) {
+            icon = newicon
+            iconimg.src = formaticonid(newicon)
+        }
+
+    // save data funcs
+        function savedataexists() {
+            return window.localStorage.getItem(SAVE_DATA_KEY) !== null
+        }
+
+        function savestuff(name, icon) {
+            window.localStorage.setItem(SAVE_DATA_KEY, JSON.stringify({
+                name: name,
+                icon: icon
+            }))
+        }
+
+        function loadstuff() {
+            let saved = window.localStorage.getItem(SAVE_DATA_KEY)
+
+            if(saved !== null) {
+                try {
+                    let parsed = JSON.parse(saved)
+                    if('name' in parsed && 'icon' in parsed) {
+                        return parsed
+                    }
+                } catch(e) {
+                    console.log("failed to parse saved profile")
+                }
+            }
+        }
+
+// hooks
 input.addEventListener('keydown', async (e)=>{
     if(connected && e.key === "Enter") {
         e.preventDefault()
         
         let text = input.value.trim()
-        if(text.length === 0) {
+        if(text.trim().length === 0) {
             alert("You cannot send an empty message")
             return
         }
@@ -206,11 +254,8 @@ input.addEventListener('keydown', async (e)=>{
         let id = crypto.randomUUID()
         
         if(name.length == 0) {
-            var adj = nameadjectives[Math.floor(Math.random() * nameadjectives.length)]
-            var noun = namenouns[Math.floor(Math.random() * namenouns.length)]
-            name = adj + noun
-
-            nameinput.value = name
+            setname(generaterandomname())
+            savestuff(name, icon)
         }
 
         let message = {
@@ -249,30 +294,27 @@ input.addEventListener('keydown', async (e)=>{
         
         // render new message
         rendermessage(message)
-        
         SEND_SOUND.play()
-        history.scrollTop = history.scrollHeight
     }
 })
 
-let usingspecial = false
 nameinput.addEventListener('input', (e) => {
-    name = e.target.value
+    let newname = e.target.value
+    setname(newname)
 
-    let usinglastspecial = usingspecial
-    usingspecial = false
-    for(special of Object.keys(specialnames)) {
-        if(name.toLowerCase() === special) {
-            icon = specialnames[special] - 1
-            iconimg.src = `img/icons/icon${icon + 1}.png`
+    let lastspecial = usingspecial
+    let special = checkifspecial(newname)
+    if(special) {
+        usingspecial = true
 
-            usingspecial = true
+        console.log(special)
+        seticon(special.icon)
+    } else {
+        usingspecial = false
+
+        if(lastspecial) {
+            seticon(getrandomicon())
         }
-    }
-
-    if(!usingspecial && usinglastspecial) {
-        icon = 0
-        iconimg.src = `img/icons/icon${icon + 1}.png`
     }
 
     savestuff(name, icon)
@@ -280,21 +322,17 @@ nameinput.addEventListener('input', (e) => {
 
 iconselect.addEventListener("click", () => {
     if(usingspecial) return
-    icon = (icon + 1) % 9
-    iconimg.src = `img/icons/icon${icon + 1}.png`
+
+    icon++
+    icon %= (maxicon + 1)
+
+    iconimg.src = formaticonid(icon)
 
     savestuff(name, icon)
 })
 
-
-// how this is gonna work:
-// when u send a message, it renders immediately
-// every n seconds, ping the chatroom endpoint. 
-let lastsuccessfulping = Date.now()
-let loadedinitialmessages = false
-let knowntopic = undefined
-
-async function refreshmessages() {
+// main heartbeat loop
+async function pingserver() {
     try {
         const response = await fetch(CHATROOM_ENDPOINT + "/messages")
 
@@ -303,45 +341,37 @@ async function refreshmessages() {
         }
 
         const json = await response.json()
-
         const messages = json.messages
+        const topic = json.topic
+
+        if(topic !== knowntopic) {
+            settopic(topic)
+        }
+
+        let addednew = false
+        let notifsoundtoplay = RECIEVE_SOUND
         for(message of messages) {
-            let added = false
-            for(message of messages) {
-                if(document.getElementById(message.id)) {
-                    continue
+            if(document.getElementById(message.id)) {
+                continue
+            }
+
+            addednew = true
+            rendermessage(message)
+            let special = checkifspecial(message.name)
+            if(special) {
+                let thisnotifsound = special.getnotifsound()
+
+                if(thisnotifsound !== RECIEVE_SOUND) {
+                    notifsoundtoplay = thisnotifsound // will play the last special notif sound if one exists
                 }
-                console.log("found message that we havent added yet: " + message.text)
-                added = true
-                rendermessage(message)
-            }
-            
-            if(added) {
-                if(loadedinitialmessages) RECIEVE_SOUND.play()
-                history.scrollTop = history.scrollHeight
             }
         }
 
-        const newtopic = json.topic
-        if(newtopic !== knowntopic) {
-            topic.textContent = `CHAT TOPIC: ${newtopic}`
-
-            knowntopic = newtopic
-            if(loadedinitialmessages) {
-                NEW_TOPIC_SOUND.play()
-
-                rendermessage({
-                    name: "SYSTEM",
-                    icon: -1,
-                    text: `CHAT TOPIC: "${newtopic}"`,
-                    time: Date.now() / 1000
-                })
-                history.scrollTop = history.scrollHeight
-            }
+        if(addednew && loadedinitialmessages) {
+            notifsoundtoplay.play()
         }
-
-        lastsuccessfulping = Date.now()
     } catch(e) {
+        console.log(e)
         console.log("failed to pign server " + lastsuccessfulping)
         if(Date.now() - lastsuccessfulping > PING_INTERVAL * 5) {
             alert("Lost connection to chatroom server, refresh the tab?")
@@ -350,12 +380,29 @@ async function refreshmessages() {
     }
 
     if(connected) {
-        setTimeout(refreshmessages, PING_INTERVAL)
+        setTimeout(pingserver, PING_INTERVAL)
     }
 }
 
 async function init() {
-    await refreshmessages()
+    // load data
+    if(savedataexists()) {
+        let data = loadstuff()
+        console.log(data)
+
+        setname(data.name)
+        seticon(data.icon)
+
+        if(checkifspecial(data.name)) {
+            usingspecial = true
+        }
+    } else {
+        setname(generaterandomname())
+        seticon(getrandomicon())
+    }
+
+    // start spinning the pinging
+    await pingserver()
     loadedinitialmessages = true
 }
 
