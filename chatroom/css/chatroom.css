@@ -116,6 +116,10 @@ h1 {
         align-items: center;
         gap: 1%;
 }
+.chatmain.me {
+    justify-content: center;
+}
+
 .chatside {
     width: 10%;
     height: 100%;
