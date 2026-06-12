@@ -99,6 +99,10 @@ fetch("js/autogennames/nouns.txt").then(res => res.text()).then(data => {
         root.appendChild(downnotice)
     }
 
+    function sanitizetextHTMLsafe(text) {
+        return text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+    }
+
     function rendermessage(messagedata) {
         let chat = document.createElement("div")
             chat.className = "chat"
@@ -124,7 +128,7 @@ fetch("js/autogennames/nouns.txt").then(res => res.text()).then(data => {
                     }
 
                 let text = document.createElement("p")
-                    text.textContent = `<${messagedata.name}> ${messagedata.text}`
+                    text.innerHTML = `&lt;${messagedata.name}&gt; ${sanitizetextHTMLsafe(messagedata.text).replaceAll(name, `<span style="color: yellow;">${name}</span>`)}`
 
                 chatmain.append(icon, text)
             chat.append(chatmain)
