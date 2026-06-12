@@ -24,12 +24,16 @@ let topic = document.getElementById("philtopic")
 
 // stuff
 let specialnames = {
-    "donaldani": 6,
-    "ms_kaylaa": 7
+    "donaldani": -1,
+    "ms_kaylaa": -2,
+    "ukubabe": -3,
+    "paint": -4
 }
 let specialclasses = {
-    6: 'donaldchat',
-    7: 'kaylachat',
+    [-1]: 'donaldchat',
+    [-2]: 'kaylachat',
+    [-3]: 'ukubabechat',
+    [-4]: 'paintchat',
 
     0: 'systemchat'
 }
@@ -276,7 +280,7 @@ nameinput.addEventListener('input', (e) => {
 
 iconselect.addEventListener("click", () => {
     if(usingspecial) return
-    icon = (icon + 1) % 5
+    icon = (icon + 1) % 9
     iconimg.src = `img/icons/icon${icon + 1}.png`
 
     savestuff(name, icon)

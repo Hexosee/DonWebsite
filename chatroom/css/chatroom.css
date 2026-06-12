@@ -117,6 +117,16 @@ h1 {
 
     border-bottom: 1px dashed #ff7700;
 }
+.chat.ukubabechat {
+    color: #575799;
+
+    border-bottom: 1px dashed #575799;
+}
+.chat.paintchat {
+    color: #1c2dc5;
+
+    border-bottom: 1px dashed #1c2dc5;
+}
 .chat.systemchat {
     color: #FF3FEE;
 
