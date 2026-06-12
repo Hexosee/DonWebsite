@@ -32,7 +32,7 @@ function checkstatus() {
                 <div id="chatroombottom">
                     <div id="chatroompersonalizeroot">
                         <div id="iconselect">
-                            <img id="selicon" src="img/icons/icon1.png">
+                            <img id="selicon" src="img/icons/icon0.png">
                         </div>
                         <input type="text" id="chatroomnameinput" placeholder="NAME HERE">
                     </div>
@@ -43,7 +43,7 @@ function checkstatus() {
             `
 
             let script = document.createElement("script")
-            script.src = "js/chatroom.js?v=2"
+            script.src = "js/chatroom.js?v=3"
             document.body.appendChild(script)
         }
     })
