@@ -32,7 +32,7 @@ class SpecialName {
 
         if(notifsound !== undefined) {
             this.notifsound = document.createElement("audio")
-                this.notifsound.src = `sound/${notifsound}.mp3`
+                this.notifsound.src = `sound/special/${notifsound}.mp3`
         }
     }
 
@@ -56,8 +56,8 @@ class SpecialName {
 const namemap = {
     "donaldani": new SpecialName('#ff7700', 'donaldrecieve'), // this is -1
     "ms_kaylaa": new SpecialName('#ff72c0', 'kaylarecieve'), // this is -2
-    "ukubabe": new SpecialName('#575799'), // this is -3
-    "paint": new SpecialName('#1c2dc5') // etc
+    "ukubabe": new SpecialName('#575799', 'ukurecieve'), // this is -3
+    "paint": new SpecialName('#1c2dc5', 'paintrecieve') // etc
 }
 
 // chatroom vars

@@ -43,7 +43,7 @@ function checkstatus() {
             `
 
             let script = document.createElement("script")
-            script.src = "js/chatroom.js?v=3"
+            script.src = "js/chatroom.js?v=4"
             document.body.appendChild(script)
         }
     })
