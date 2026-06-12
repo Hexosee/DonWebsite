@@ -33,12 +33,9 @@ export class Message {
 }
 export class SystemMessage extends Message {
     constructor(content) {
-        super(MessageType.SYSTEM, content)
+        super('SYSTEM', 'phil', content, MessageType.SYSTEM)
         
         this.system = true
-        
-        this.name = 'SYSTEM'
-        this.icon = 'phil'
     }
 }
 
@@ -128,6 +125,8 @@ class RenderedMessage {
             color: ${color};
             border-bottom: 1px dashed ${color};
         `
+
+        return this
     }
 
     setname(name) {
@@ -158,6 +157,8 @@ function rendersystem(messagedata) {
     let rendered = 
         renderchat(messagedata)
             .setcolor('#FF3FEE')
+
+    return rendered
 }
 
 export function rendermessage(message) {
@@ -176,7 +177,11 @@ export function rendermessage(message) {
     }
 }
 
+import { HISTORY } from './elements.js'
 export function sendsystemmessage(content) {
     let message = new SystemMessage(content)
-    return rendermessage(message)
+    let rendered = rendermessage(message)
+
+    HISTORY.append(rendered.element)
+    HISTORY.scrollTop = HISTORY.scrollHeight
 }

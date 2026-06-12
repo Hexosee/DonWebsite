@@ -43,7 +43,12 @@ export default {
     },
     
     lastsuccessfulping,
-    loadedinitialmessages,
+    get loadedinitialmessages() {
+        return loadedinitialmessages
+    },
+    set loadedinitialmessages(val) {
+        loadedinitialmessages = val
+    },
 
     disconnect,
     settopic
