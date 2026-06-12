@@ -24,18 +24,40 @@ let input = document.getElementById("chatroominput")
 let topicdisplay = document.getElementById("philtopic")
 
 // special name stuff
+let spidx = 0
 class SpecialName {
-    constructor(icon, css) {
-        this.icon = icon
-        this.css = css
+    constructor(color, notifsound) {
+        this.icon = --spidx
+        this.color = color
+
+        if(notifsound !== undefined) {
+            this.notifsound = document.createElement("audio")
+                this.notifsound.src = `sound/${notifsound}.mp3`
+        }
+    }
+
+    getcss() {
+        return `
+            color: ${this.color};
+            border-bottom: 1px dashed ${this.color};
+        `
+    }
+
+    getnotifsound() {
+        if(this.notifsound) {
+            return this.notifsound
+        }
+
+        return RECIEVE_SOUND
     }
 }
 
+// you need to add in order of the icons, descending. e.g.:
 const namemap = {
-    "donaldani": new SpecialName(-1, "donaldchat"),
-    "ms_kaylaa": new SpecialName(-2, "kaylachat"),
-    "ukubabe": new SpecialName(-3, "ukubabechat"),
-    "paint": new SpecialName(-4, "paintchat")
+    "donaldani": new SpecialName('#ff7700', 'donaldrecieve'), // this is -1
+    "ms_kaylaa": new SpecialName('#ff72c0', 'kaylarecieve'), // this is -2
+    "ukubabe": new SpecialName('#575799'), // this is -3
+    "paint": new SpecialName('#1c2dc5') // etc
 }
 
 // chatroom vars
@@ -84,8 +106,7 @@ fetch("js/autogennames/nouns.txt").then(res => res.text()).then(data => {
 
             let special = checkifspecial(messagedata.name)
             if(special) {
-                chat.classList.add(special.css)
-
+                chat.style = special.getcss()
                 messagedata.icon = special.icon
             }
 
@@ -324,6 +345,7 @@ async function pingserver() {
         }
 
         let addednew = false
+        let notifsoundtoplay = RECIEVE_SOUND
         for(message of messages) {
             if(document.getElementById(message.id)) {
                 continue
@@ -331,10 +353,18 @@ async function pingserver() {
 
             addednew = true
             rendermessage(message)
+            let special = checkifspecial(message.name)
+            if(special) {
+                let thisnotifsound = special.getnotifsound()
+
+                if(thisnotifsound !== RECIEVE_SOUND) {
+                    notifsoundtoplay = thisnotifsound // will play the last special notif sound if one exists
+                }
+            }
         }
 
         if(addednew && loadedinitialmessages) {
-            RECIEVE_SOUND.play()
+            notifsoundtoplay.play()
         }
     } catch(e) {
         console.log(e)
@@ -358,6 +388,10 @@ async function init() {
 
         setname(data.name)
         seticon(data.icon)
+
+        if(checkifspecial(data.name)) {
+            usingspecial = true
+        }
     } else {
         setname(generaterandomname())
         seticon(getrandomicon())
