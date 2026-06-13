@@ -50,7 +50,7 @@ Elements.CHATBAR.addEventListener('keydown', async (e)=>{
             let i = 0
             let cancel = false
             while (char === "^") {
-                if (i > 25) { // too much
+                if (i > 35) { // too much
                     cancel = true
                     break
                 }
